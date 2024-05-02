@@ -448,7 +448,7 @@ public class Consultar extends javax.swing.JFrame {
                     JOptionPane.ERROR_MESSAGE);
         } else if (!MaterialLibro.localizarMaterialLibro(txtId.getText().trim())) {
             JOptionPane.showMessageDialog(null, "No existe este codigo, resgistrado"
-                    + "\n Imposible eliminar",
+                    + "\n Imposible encontrarlo",
                     "Error", JOptionPane.ERROR_MESSAGE);
         } else {
             Libro = MaterialLibro.seleccionarMaterialLibro(txtId.getText().trim());
