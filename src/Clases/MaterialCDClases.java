@@ -1,5 +1,7 @@
 package Clases;
 
+import java.util.List;
+
 /**
  *
  * @author Laura Pineda
@@ -80,4 +82,8 @@ public class MaterialCDClases {
         public void setuniDisp(int uniDisp) {
             this.uniDisp = uniDisp;
         }
+
+    public void add(List<MaterialCDClases> materialCDs) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }
