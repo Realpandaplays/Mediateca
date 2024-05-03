@@ -5,6 +5,7 @@
  */
 package VistasPrincipales;
 
+
 import java.awt.Color;
 import java.awt.Font;
 
@@ -279,7 +280,9 @@ public class menuListar extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRegresarMouseExited
 
     private void btnEscritoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEscritoMouseClicked
- 
+        Vistas.Consultar.Escrito escrito = new  Vistas.Consultar.Escrito();
+        escrito.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnEscritoMouseClicked
 
     private void btnEscritoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEscritoMouseEntered
@@ -295,7 +298,9 @@ public class menuListar extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEscritoMouseExited
 
     private void btnVisualMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVisualMouseClicked
-
+        Vistas.Consultar.Audiovisual audiovisual = new  Vistas.Consultar.Audiovisual();
+        audiovisual.setVisible(true);
+        this.dispose();        
     }//GEN-LAST:event_btnVisualMouseClicked
 
     private void btnVisualMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVisualMouseEntered
