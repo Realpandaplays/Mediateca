@@ -63,28 +63,28 @@ public class AgregarR extends javax.swing.JFrame {
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel3.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Código de identificación:");
 
         jLabel4.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Titulo:");
 
         jLabel7.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
         jLabel7.setText("Editorial:");
 
         jLabel8.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(0, 0, 0));
         jLabel8.setText("Periodicidad:");
 
         jLabel9.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(0, 0, 0));
         jLabel9.setText("Año de Publicación:");
 
         jLabel10.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(0, 0, 0));
         jLabel10.setText("Unidades Disponibles:");
+
+        txtPublicacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPublicacionActionPerformed(evt);
+            }
+        });
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -441,7 +441,7 @@ public class AgregarR extends javax.swing.JFrame {
             String titulo = txtTitulo.getText();
             String editorial = txtEditorial.getText();
             String Periodicidad = txtPeriodicidad.getText();
-            int fechaPubli = Integer.parseInt(txtPublicacion.getText());
+            String fechaPubli = txtPublicacion.getText();
             int uniDispo = Integer.parseInt(txtUnidades.getText());
             
             MaterialRevistaClases MaterialRevistaClases = new MaterialRevistaClases(idInterno, titulo, editorial,
@@ -469,6 +469,10 @@ public class AgregarR extends javax.swing.JFrame {
         agregar.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnRegresarMouseClicked
+
+    private void txtPublicacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPublicacionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPublicacionActionPerformed
 
     /**
      * @param args the command line arguments
