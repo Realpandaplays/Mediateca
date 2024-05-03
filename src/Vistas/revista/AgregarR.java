@@ -46,7 +46,6 @@ public class AgregarR extends javax.swing.JFrame {
         txtTitulo = new javax.swing.JTextField();
         txtEditorial = new javax.swing.JTextField();
         txtPeriodicidad = new javax.swing.JTextField();
-        txtPublicacion = new javax.swing.JTextField();
         txtUnidades = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         btnGuardar = new javax.swing.JLabel();
@@ -54,6 +53,7 @@ public class AgregarR extends javax.swing.JFrame {
         btnNuevo = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         btnRegresar = new javax.swing.JLabel();
+        txtPublicacion = new javax.swing.JFormattedTextField();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -79,12 +79,6 @@ public class AgregarR extends javax.swing.JFrame {
 
         jLabel10.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         jLabel10.setText("Unidades Disponibles:");
-
-        txtPublicacion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtPublicacionActionPerformed(evt);
-            }
-        });
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -215,6 +209,12 @@ public class AgregarR extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        try {
+            txtPublicacion.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####-##-##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -247,13 +247,13 @@ public class AgregarR extends javax.swing.JFrame {
                         .addComponent(txtUnidades))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jLabel9)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtPublicacion))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtPeriodicidad)))
-                .addContainerGap(46, Short.MAX_VALUE))
+                .addContainerGap(48, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -430,8 +430,8 @@ public class AgregarR extends javax.swing.JFrame {
         } else if (txtPeriodicidad.getText().trim().isEmpty()){
             JOptionPane.showMessageDialog(null, "El campo Periodicidad no puede quedar en blanco",
                     "Error", JOptionPane.ERROR_MESSAGE);
-        } else if (!txtPublicacion.getText().matches("[0-9]+")){
-            JOptionPane.showMessageDialog(null, "El campo Fecha de publicación solo puede contener numeros",
+        } else if (txtPublicacion.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "El campo Fecha de publicación no puede estar en blanco",
                     "Error", JOptionPane.ERROR_MESSAGE);
         } else if (!txtUnidades.getText().matches("[0-9]+")){
             JOptionPane.showMessageDialog(null, "El campo Unidades disponibles solo puede contener numeros",
@@ -469,10 +469,6 @@ public class AgregarR extends javax.swing.JFrame {
         agregar.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnRegresarMouseClicked
-
-    private void txtPublicacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPublicacionActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtPublicacionActionPerformed
 
     /**
      * @param args the command line arguments
@@ -530,7 +526,7 @@ public class AgregarR extends javax.swing.JFrame {
     private javax.swing.JTextField txtEditorial;
     private javax.swing.JTextField txtId;
     private javax.swing.JTextField txtPeriodicidad;
-    private javax.swing.JTextField txtPublicacion;
+    private javax.swing.JFormattedTextField txtPublicacion;
     private javax.swing.JTextField txtTitulo;
     private javax.swing.JTextField txtUnidades;
     // End of variables declaration//GEN-END:variables

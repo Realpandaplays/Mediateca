@@ -90,7 +90,7 @@ public class BorrarR extends javax.swing.JFrame {
         jLabel5.setText("Editorial:");
 
         jLabel6.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
-        jLabel6.setText("Periocidad:");
+        jLabel6.setText("Periodicidad:");
 
         jLabel10.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         jLabel10.setText("Unidades Disponibles:");
