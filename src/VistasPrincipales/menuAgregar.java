@@ -74,7 +74,7 @@ public class menuAgregar extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(14, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(txtAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 630, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27))
         );
@@ -90,7 +90,7 @@ public class menuAgregar extends javax.swing.JFrame {
 
         btnLibro.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         btnLibro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/libro 124x124.png"))); // NOI18N
-        btnLibro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnLibro.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnLibro.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnLibroMouseClicked(evt);
@@ -104,7 +104,7 @@ public class menuAgregar extends javax.swing.JFrame {
         });
 
         btnRevista.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/revista.jpg"))); // NOI18N
-        btnRevista.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnRevista.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnRevista.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnRevistaMouseClicked(evt);
@@ -118,7 +118,7 @@ public class menuAgregar extends javax.swing.JFrame {
         });
 
         btnCd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/cd.jpg"))); // NOI18N
-        btnCd.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCd.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnCd.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnCdMouseClicked(evt);
@@ -132,7 +132,7 @@ public class menuAgregar extends javax.swing.JFrame {
         });
 
         btnDvd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/dvd.jpg"))); // NOI18N
-        btnDvd.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnDvd.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnDvd.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnDvdMouseClicked(evt);
@@ -146,7 +146,7 @@ public class menuAgregar extends javax.swing.JFrame {
         });
 
         btnRegresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/regreso (1).png"))); // NOI18N
-        btnRegresar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnRegresar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnRegresar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnRegresarMouseClicked(evt);
@@ -308,7 +308,7 @@ public class menuAgregar extends javax.swing.JFrame {
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                .addContainerGap(10, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(txtDvd)
                 .addContainerGap())
         );
@@ -327,7 +327,7 @@ public class menuAgregar extends javax.swing.JFrame {
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(btnLibro, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(btnRevista, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(38, 38, 38)
                                 .addComponent(btnCd, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
