@@ -17,6 +17,9 @@ import javax.swing.JOptionPane;
  *
  * @author Laura Pineda
  */
+
+  /** hice un cambio**/
+
 public class Agregar extends javax.swing.JFrame {
 
     private MaterialLibro MaterialLibro = new MaterialLibro ((Connection) ConexionMySQL.obtenerConexion());

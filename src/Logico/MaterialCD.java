@@ -49,8 +49,8 @@ public class MaterialCD {
         return rowInserted;
     }
     
-    /*localizar por Código Interno*/
-    public boolean localizarMaterialCD (String idInterno){
+
+     public boolean localizarMaterialCD (String idInterno){
         boolean encontrado = false;
         
         try {
@@ -92,10 +92,6 @@ public class MaterialCD {
                 int uniDisp = resultSet.getInt("uniDisp");
                 
                 materialCD = new MaterialCDClases (id, titulo, artista, duracion, genero, numCanciones, uniDisp);
-            }
-            resultSet.close();
-            statement.close();
-        }catch (SQLException ex) {
             Logger.getLogger(MaterialCD.class.getName()).log(Level.SEVERE, null, ex);
         }
         return materialCD;
@@ -176,5 +172,8 @@ public class MaterialCD {
             Logger.getLogger(MaterialLibro.class.getName()).log(Level.SEVERE, null, ex);
         }
         return rowDeleted;
+            Logger.getLogger(MaterialLibro.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return materialCD;
     }
 }

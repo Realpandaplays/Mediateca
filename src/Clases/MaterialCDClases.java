@@ -16,7 +16,7 @@ public class MaterialCDClases {
     private int numCanciones;
     private int uniDisp;
     
-        public MaterialCDClases (String idInterno, String titulo, String artista, int duracion, String genero, int numCanciones, int uniDisp) {
+        public MaterialCDClases (String idInterno, String titulo, String artista, String genero, int duracion, int numCanciones, int uniDisp) {
         
             this.idInterno = idInterno;
             this.titulo = titulo;
@@ -26,6 +26,8 @@ public class MaterialCDClases {
             this.numCanciones = numCanciones;
             this.uniDisp = uniDisp;
             }
+
+    
          
         public String getidInterno() {
         return idInterno;
