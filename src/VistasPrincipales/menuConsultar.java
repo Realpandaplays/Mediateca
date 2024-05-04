@@ -4,6 +4,7 @@ package VistasPrincipales;
 import Vistas.cd.ConsultarCD;
 import Vistas.libro.Borrar;
 import Vistas.libro.Consultar;
+import Vistas.revista.ConsultarR;
 import java.awt.Color;
 import java.awt.Font;
 
@@ -540,7 +541,9 @@ public class menuConsultar extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLibroMouseClicked
 
     private void btnRevistaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRevistaMouseClicked
-        // TODO add your handling code here:
+        ConsultarR cRevista = new ConsultarR();
+        cRevista.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnRevistaMouseClicked
 
     private void btnCdMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCdMouseClicked

@@ -461,10 +461,10 @@ public class AgregarCd extends javax.swing.JFrame {
             String idInterno = txtId.getText();
             String titulo = txtTitulo.getText();
             String artista = txtArtista.getText();
-            int numCanciones = Integer.parseInt(txtNumero.getText());
+            String numCanciones = txtNumero.getText();
             String genero = txtGenero.getText();
-            int duracion = Integer.parseInt(txtDuracion.getText());
-            int uniDisp = Integer.parseInt(txtUnidades.getText());
+            String duracion = txtDuracion.getText();
+            String uniDisp = txtUnidades.getText();
             
             MaterialCDClases MaterialCDClases = new MaterialCDClases(idInterno, titulo, artista, genero, duracion,
                     numCanciones, uniDisp);

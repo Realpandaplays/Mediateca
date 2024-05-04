@@ -46,7 +46,6 @@ public class AgregarR extends javax.swing.JFrame {
         txtTitulo = new javax.swing.JTextField();
         txtEditorial = new javax.swing.JTextField();
         txtPeriodicidad = new javax.swing.JTextField();
-        txtPublicacion = new javax.swing.JTextField();
         txtUnidades = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         btnGuardar = new javax.swing.JLabel();
@@ -54,6 +53,7 @@ public class AgregarR extends javax.swing.JFrame {
         btnNuevo = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         btnRegresar = new javax.swing.JLabel();
+        txtPublicacion = new javax.swing.JFormattedTextField();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -63,27 +63,21 @@ public class AgregarR extends javax.swing.JFrame {
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel3.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Código de identificación:");
 
         jLabel4.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Titulo:");
 
         jLabel7.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
         jLabel7.setText("Editorial:");
 
         jLabel8.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(0, 0, 0));
         jLabel8.setText("Periodicidad:");
 
         jLabel9.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(0, 0, 0));
         jLabel9.setText("Año de Publicación:");
 
         jLabel10.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(0, 0, 0));
         jLabel10.setText("Unidades Disponibles:");
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
@@ -215,6 +209,12 @@ public class AgregarR extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        try {
+            txtPublicacion.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####-##-##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -247,13 +247,13 @@ public class AgregarR extends javax.swing.JFrame {
                         .addComponent(txtUnidades))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jLabel9)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtPublicacion))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtPeriodicidad)))
-                .addContainerGap(46, Short.MAX_VALUE))
+                .addContainerGap(48, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -430,8 +430,8 @@ public class AgregarR extends javax.swing.JFrame {
         } else if (txtPeriodicidad.getText().trim().isEmpty()){
             JOptionPane.showMessageDialog(null, "El campo Periodicidad no puede quedar en blanco",
                     "Error", JOptionPane.ERROR_MESSAGE);
-        } else if (!txtPublicacion.getText().matches("[0-9]+")){
-            JOptionPane.showMessageDialog(null, "El campo Fecha de publicación solo puede contener numeros",
+        } else if (txtPublicacion.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "El campo Fecha de publicación no puede estar en blanco",
                     "Error", JOptionPane.ERROR_MESSAGE);
         } else if (!txtUnidades.getText().matches("[0-9]+")){
             JOptionPane.showMessageDialog(null, "El campo Unidades disponibles solo puede contener numeros",
@@ -441,7 +441,7 @@ public class AgregarR extends javax.swing.JFrame {
             String titulo = txtTitulo.getText();
             String editorial = txtEditorial.getText();
             String Periodicidad = txtPeriodicidad.getText();
-            int fechaPubli = Integer.parseInt(txtPublicacion.getText());
+            String fechaPubli = txtPublicacion.getText();
             int uniDispo = Integer.parseInt(txtUnidades.getText());
             
             MaterialRevistaClases MaterialRevistaClases = new MaterialRevistaClases(idInterno, titulo, editorial,
@@ -526,7 +526,7 @@ public class AgregarR extends javax.swing.JFrame {
     private javax.swing.JTextField txtEditorial;
     private javax.swing.JTextField txtId;
     private javax.swing.JTextField txtPeriodicidad;
-    private javax.swing.JTextField txtPublicacion;
+    private javax.swing.JFormattedTextField txtPublicacion;
     private javax.swing.JTextField txtTitulo;
     private javax.swing.JTextField txtUnidades;
     // End of variables declaration//GEN-END:variables
