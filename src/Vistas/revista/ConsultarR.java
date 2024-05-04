@@ -33,7 +33,7 @@ public class ConsultarR extends javax.swing.JFrame {
     
     private void cargarCajas(MaterialRevistaClases Revista) {
 
-       txtId.setText(Revista.getidInterno());
+        txtId.setText(Revista.getidInterno());
         txtTitulo.setText(Revista.gettitulo());
         txtEditorial.setText(Revista.geteditorial());
         txtPeriodicidad.setText(Revista.getperiodicidad());

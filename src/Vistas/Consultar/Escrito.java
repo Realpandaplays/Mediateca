@@ -4,8 +4,18 @@
  * and open the template in the editor.
  */
 package Vistas.Consultar;
+import Clases.MaterialRevistaClases;
+import Logico.ConexionMySQL;
+import Logico.MaterialRevista;
 import java.awt.Color;
 import java.awt.Font;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -13,11 +23,88 @@ import java.awt.Font;
  */
 public class Escrito extends javax.swing.JFrame {
 
+    private MaterialRevista MaterialRevista = new MaterialRevista ((Connection) ConexionMySQL.obtenerConexion());
+    private MaterialRevistaClases Revista = null;
     /**
      * Creates new form Escrito
      */
     public Escrito() {
         initComponents();
+        cargarTableRevistas();
+        cargarTableLibros();
+    }
+    
+     private void cargarTableLibros(){
+        
+         try{
+         Connection con = ConexionMySQL.obtenerConexion();
+         
+         Statement st = con.createStatement();
+         
+         String sql = "Select * from libros";
+         ResultSet rs = st.executeQuery(sql);
+         
+         while(rs.next()){
+             
+         String id = rs.getString("idInterno");
+         String titulo = rs.getString("titulo");
+         String autor = rs.getString("autor");
+          String numPaginas = String.valueOf(rs.getInt("numPaginas"));
+         String disponibles = String.valueOf(rs.getInt("uniDispo"));
+         String editorial = rs.getString("editorial");
+         
+         //Arreglo de datos
+         String tbData[] = {id, titulo, autor, numPaginas, editorial, disponibles};
+         DefaultTableModel tblModelLibros = (DefaultTableModel)jTableLibros.getModel();
+         
+         //Agregando arreglo a la tabla
+         tblModelLibros.addRow(tbData);  
+         }
+        con.close();
+         
+         }
+         catch(Exception e){
+         
+         JOptionPane.showMessageDialog(null, "un error ha ocurrido"
+                    + e,
+                    "Error", JOptionPane.ERROR_MESSAGE);
+         }
+    }
+    
+     private void cargarTableRevistas(){
+        
+         try{
+         Connection con = ConexionMySQL.obtenerConexion();
+         
+         Statement st = con.createStatement();
+         
+         String sql = "Select * from Revistas";
+         ResultSet rs = st.executeQuery(sql);
+         
+         while(rs.next()){
+             
+         String id = String.valueOf(rs.getInt("idInterno"));
+         String titulo = rs.getString("titulo");
+         String editorial = rs.getString("editorial");
+         String disponibles = String.valueOf(rs.getInt("uniDispo"));
+         String fecha = rs.getString("fechaPubli");
+         
+         //Arreglo de datos
+         String tbData[] = {id, titulo, editorial, fecha, disponibles};
+         DefaultTableModel tblModelRevistas = (DefaultTableModel)jTableRevistas.getModel();
+         
+         //Agregando arreglo a la tabla
+         tblModelRevistas.addRow(tbData);  
+         }
+        con.close();
+         
+         }
+         catch(Exception e){
+         
+         JOptionPane.showMessageDialog(null, "un error ha ocurrido"
+                    + e,
+                    "Error", JOptionPane.ERROR_MESSAGE);
+         }
     }
 
     /**
@@ -30,7 +117,7 @@ public class Escrito extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTableLibros = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
         txtAgregar = new javax.swing.JLabel();
         btnRegresar = new javax.swing.JLabel();
@@ -50,7 +137,7 @@ public class Escrito extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
         jtxtDispoblesL = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        jTableRevistas = new javax.swing.JTable();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
@@ -71,18 +158,15 @@ public class Escrito extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTableLibros.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
-                "Codigo", "Titulo", "Autor", "Num Paginas", "Unidades"
+                "Codigo", "Titulo", "Autor", "Num Paginas", "Editorial", "Unidades"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jTableLibros);
 
         jPanel2.setBackground(new java.awt.Color(134, 143, 146));
 
@@ -218,12 +302,13 @@ public class Escrito extends javax.swing.JFrame {
                     .addComponent(jLabel5)
                     .addComponent(jtxtPaginas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(23, 23, 23)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jtxtTituloL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel13)
-                        .addComponent(jtxtDispoblesL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jtxtDispoblesL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel3)
+                        .addComponent(jtxtTituloL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(27, 27, 27)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
@@ -237,18 +322,15 @@ public class Escrito extends javax.swing.JFrame {
                     .addContainerGap(185, Short.MAX_VALUE)))
         );
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        jTableRevistas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "Codigo", "Titulo", "Editorial", "Fecha de publicacion", "Disponibles"
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(jTableRevistas);
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         jLabel6.setText("Libros");
@@ -486,8 +568,8 @@ public class Escrito extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
+    private javax.swing.JTable jTableLibros;
+    private javax.swing.JTable jTableRevistas;
     private javax.swing.JTextField jtxtAutor;
     private javax.swing.JTextField jtxtCodigoL;
     private javax.swing.JTextField jtxtCodigoR;
