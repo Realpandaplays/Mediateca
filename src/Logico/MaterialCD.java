@@ -54,7 +54,7 @@ public class MaterialCD {
         boolean encontrado = false;
         
         try {
-            String sql = "SELECT * FROM libros WHERE idInterno = ?";
+            String sql = "SELECT * FROM cd WHERE idInterno = ?";
             try (java.sql.PreparedStatement statement = conexion.prepareStatement(sql)) {
                 statement.setString(1, idInterno);
                 try (ResultSet resultSet = statement.executeQuery()) {
@@ -74,7 +74,7 @@ public class MaterialCD {
         MaterialCDClases materialCD = null;
         
         try {
-            String sql = "SELECT * FROM libros WHERE idInterno = ?";
+            String sql = "SELECT * FROM cd WHERE idInterno = ?";
             
             java.sql.PreparedStatement statement = conexion.prepareStatement(sql);
             statement.setString(1, idInterno);
@@ -106,7 +106,7 @@ public class MaterialCD {
     List<MaterialCDClases> materialCDs = new ArrayList<>();
     
     try {
-        String sql = "SELECT *FROM libros";
+        String sql = "SELECT *FROM cd";
         
          Statement statement = conexion.createStatement();
          ResultSet resultSet = statement.executeQuery(sql);
@@ -136,7 +136,7 @@ public class MaterialCD {
         boolean rowUpdated = false;
         
         try {
-            String sql = "UPDATE libros SET titulo = ?, "
+            String sql = "UPDATE cd SET titulo = ?, "
                     + " autor = ?, numPaginas = ?, editorial = ?, ISBN = ?,"
                     + " yearPubli = ?, uniDispo = ?"
                     + " WHERE idInterno = ?";
@@ -164,7 +164,7 @@ public class MaterialCD {
         boolean rowDeleted = false;
         
         try {
-            String sql = "DELETE FROM libros WHERE idInterno = ?";
+            String sql = "DELETE FROM cd WHERE idInterno = ?";
 
             try (java.sql.PreparedStatement statement = conexion.prepareStatement(sql)) {
                 statement.setString(1, idInterno);
