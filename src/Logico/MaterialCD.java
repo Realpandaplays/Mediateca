@@ -15,7 +15,7 @@ import java.util.logging.Logger;
  */
 public class MaterialCD {
 
-    private Connection conexion;
+    private final Connection conexion;
     
     public MaterialCD(Connection conexion){
         this.conexion = conexion;
