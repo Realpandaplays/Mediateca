@@ -10,11 +10,11 @@ public class MaterialRevistaClases {
     private String titulo;
     private String editorial;
     private String periodicidad;
-    private int fechaPubli;
+    private String fechaPubli;
     private int uniDispo;
     
      public MaterialRevistaClases(String idInterno, String titulo, 
-             String editorial, int fechaPubli, String periodicidad, int uniDispo){
+             String editorial, String fechaPubli, String periodicidad, int uniDispo){
          
         this.idInterno = idInterno;
         this.titulo = titulo;
@@ -57,11 +57,11 @@ public class MaterialRevistaClases {
         this.periodicidad = periodicidad;
     }
     
-    public int getfechaPubli() {
+    public String getfechaPubli() {
         return fechaPubli;
     }
 
-    public void setfechaPubli(int fechaPubli) {
+    public void setfechaPubli(String fechaPubli) {
         this.fechaPubli = fechaPubli;
     }
 
