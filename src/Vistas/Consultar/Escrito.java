@@ -23,6 +23,8 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author kevin
  */
+
+
 public class Escrito extends javax.swing.JFrame {
 
     private MaterialRevista MaterialRevista = new MaterialRevista ((Connection) ConexionMySQL.obtenerConexion());
