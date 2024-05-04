@@ -49,12 +49,21 @@ public class MaterialCD {
         return rowInserted;
     }
     
-
      public boolean localizarMaterialCD (String idInterno){
         boolean encontrado = false;
         
         try {
             String sql = "SELECT * FROM cd WHERE idInterno = ?";
+            java.sql.PreparedStatement statement = conexion.prepareStatement(sql);
+            statement.setString(1, idInterno);
+            ResultSet resultSet = statement.executeQuery();
+            
+            if (resultSet.next()) {
+                encontrado = true;
+            }
+
+            resultSet.close();
+            statement.close();
             try (java.sql.PreparedStatement statement = conexion.prepareStatement(sql)) {
                 statement.setString(1, idInterno);
                 try (ResultSet resultSet = statement.executeQuery()) {
@@ -68,6 +77,7 @@ public class MaterialCD {
         }
         return encontrado;
     }
+     
     
     /*Seleccionar un material por su código*/
     public MaterialCDClases seleccionarMaterialCD (String idInterno){
@@ -90,9 +100,13 @@ public class MaterialCD {
                 int duracion = resultSet.getInt("duracion");
                 int numCanciones = resultSet.getInt("numCanciones");
                 int uniDisp = resultSet.getInt("uniDisp");
-                
-                materialCD = new MaterialCDClases (id, titulo, artista, duracion, genero, numCanciones, uniDisp);
-            Logger.getLogger(MaterialCD.class.getName()).log(Level.SEVERE, null, ex);
+                materialCD = new MaterialCDClases (id, titulo, artista, genero, duracion, numCanciones, uniDisp);
+            }
+            resultSet.close();
+            statement.close();
+        }catch (SQLException ex) {
+            Logger.getLogger(MaterialLibro.class.getName()).log(Level.SEVERE, null, ex);
+        }
         }
         return materialCD;
     }
