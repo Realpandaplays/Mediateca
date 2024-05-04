@@ -1,6 +1,8 @@
 package Logico;
 import java.sql.Connection;
 import Clases.MaterialCDClases;
+
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -42,5 +44,57 @@ public class MaterialCD {
             Logger.getLogger(MaterialCDClases.class.getName()).log(Level.SEVERE, null, ex);
         }
         return rowInserted;
+    }
+    
+     public boolean localizarMaterialCD (String idInterno){
+        boolean encontrado = false;
+        
+        try {
+            String sql = "SELECT * FROM cd WHERE idInterno = ?";
+            java.sql.PreparedStatement statement = conexion.prepareStatement(sql);
+            statement.setString(1, idInterno);
+            ResultSet resultSet = statement.executeQuery();
+            
+            if (resultSet.next()) {
+                encontrado = true;
+            }
+
+            resultSet.close();
+            statement.close();
+        } catch (SQLException ex) {
+             Logger.getLogger(MaterialCD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return encontrado;
+    }
+     
+      public MaterialCDClases seleccionarMaterialCD (String idInterno){
+        MaterialCDClases materialCD = null;
+        
+        try {
+            String sql = "SELECT * FROM cd WHERE idInterno = ?";
+            
+            java.sql.PreparedStatement statement = conexion.prepareStatement(sql);
+            statement.setString(1, idInterno);
+
+            ResultSet resultSet = statement.executeQuery();
+            
+            if (resultSet.next()){
+                
+                String id = resultSet.getString("idInterno");
+                String titulo = resultSet.getString("titulo");
+                String artista = resultSet.getString("artista");
+                String genero = resultSet.getString("genero");
+                int duracion = resultSet.getInt("duracion");
+                int numCanciones = resultSet.getInt("numCanciones");
+                int uniDisp = resultSet.getInt("uniDisp");
+                
+                materialCD = new MaterialCDClases (id, titulo, artista, genero, duracion, numCanciones, uniDisp);
+            }
+            resultSet.close();
+            statement.close();
+        }catch (SQLException ex) {
+            Logger.getLogger(MaterialLibro.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return materialCD;
     }
 }
