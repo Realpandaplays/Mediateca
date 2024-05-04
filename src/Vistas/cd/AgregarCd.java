@@ -466,7 +466,7 @@ public class AgregarCd extends javax.swing.JFrame {
             int duracion = Integer.parseInt(txtDuracion.getText());
             int uniDisp = Integer.parseInt(txtUnidades.getText());
             
-            MaterialCDClases MaterialCDClases = new MaterialCDClases(idInterno, titulo, artista, duracion, genero,
+            MaterialCDClases MaterialCDClases = new MaterialCDClases(idInterno, titulo, artista, genero, duracion,
                     numCanciones, uniDisp);
             
             if (MaterialCD.MaterialCD(MaterialCDClases)){
