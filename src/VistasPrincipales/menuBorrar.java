@@ -1,6 +1,7 @@
 
 package VistasPrincipales;
 
+import Vistas.cd.BorrarCD;
 import Vistas.libro.Borrar;
 import java.awt.Color;
 import java.awt.Font;
@@ -542,7 +543,10 @@ public class menuBorrar extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRevistaMouseClicked
 
     private void btnCdMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCdMouseClicked
-        // TODO add your handling code here:
+        /*TODO add your handling code here:*/
+        BorrarCD CD = new BorrarCD();
+        CD.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnCdMouseClicked
 
     private void btnDvdMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDvdMouseClicked
