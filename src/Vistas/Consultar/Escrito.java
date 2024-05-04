@@ -4,8 +4,10 @@
  * and open the template in the editor.
  */
 package Vistas.Consultar;
+import Clases.MaterialLibroClases;
 import Clases.MaterialRevistaClases;
 import Logico.ConexionMySQL;
+import Logico.MaterialLibro;
 import Logico.MaterialRevista;
 import java.awt.Color;
 import java.awt.Font;
@@ -25,6 +27,8 @@ public class Escrito extends javax.swing.JFrame {
 
     private MaterialRevista MaterialRevista = new MaterialRevista ((Connection) ConexionMySQL.obtenerConexion());
     private MaterialRevistaClases Revista = null;
+    private MaterialLibro MaterialLibro = new MaterialLibro ((Connection) ConexionMySQL.obtenerConexion());
+    private MaterialLibroClases Libro = null;
     /**
      * Creates new form Escrito
      */
@@ -96,8 +100,6 @@ public class Escrito extends javax.swing.JFrame {
          //Agregando arreglo a la tabla
          tblModelRevistas.addRow(tbData);  
          }
-        con.close();
-         
          }
          catch(Exception e){
          
@@ -122,39 +124,21 @@ public class Escrito extends javax.swing.JFrame {
         txtAgregar = new javax.swing.JLabel();
         btnRegresar = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        btnSearch = new javax.swing.JButton();
-        jtxtSearchLibros = new javax.swing.JTextField();
         btnBuscarLibro = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
         jtxtCodigoL = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jtxtTituloL = new javax.swing.JTextField();
-        jtxtAutor = new javax.swing.JTextField();
-        jtxtPaginas = new javax.swing.JTextField();
         jBusquedaL = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        jtxtDispoblesL = new javax.swing.JTextField();
+        label1 = new java.awt.Label();
+        btnReiniciarL = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTableRevistas = new javax.swing.JTable();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         btnBuscarRevistas = new javax.swing.JButton();
-        btnSearch1 = new javax.swing.JButton();
-        jtxtSearchRevistas = new javax.swing.JTextField();
         jBusquedaR = new javax.swing.JLabel();
         jtxtCodigoR = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        jtxtTituloR = new javax.swing.JTextField();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jtxtEditorial1 = new javax.swing.JTextField();
-        jLabel11 = new javax.swing.JLabel();
-        jFtxtFecha = new javax.swing.JFormattedTextField();
-        jLabel12 = new javax.swing.JLabel();
-        jtxtDispoblesR = new javax.swing.JTextField();
+        btnReiniciar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -220,25 +204,29 @@ public class Escrito extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        btnSearch.setText("Buscar");
-
         btnBuscarLibro.setText("Buscar  Libro");
-
-        jLabel2.setText("Codigo");
-
-        jLabel3.setText("Titulo");
-
-        jLabel4.setText("Autor");
-
-        jLabel5.setText("Cantidad de paginas");
-
-        jtxtPaginas.setToolTipText("");
+        btnBuscarLibro.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnBuscarLibroMouseClicked(evt);
+            }
+        });
+        btnBuscarLibro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarLibroActionPerformed(evt);
+            }
+        });
 
         jBusquedaL.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jBusquedaL.setText("Busqueda Avanzada");
+        jBusquedaL.setText("Busqueda Libros");
 
-        jLabel13.setText("Disponibles");
-        jLabel13.setToolTipText("");
+        label1.setText("Se busca atraves de codigo");
+
+        btnReiniciarL.setText("Reiniciar Lista");
+        btnReiniciarL.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReiniciarLActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -247,79 +235,31 @@ public class Escrito extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 362, Short.MAX_VALUE)
-                        .addComponent(jtxtPaginas, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnSearch)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jtxtSearchLibros))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel3))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jtxtCodigoL, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addGap(16, 16, 16)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jtxtAutor)
-                                    .addComponent(jtxtTituloL, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addGap(145, 145, 145))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel13)
-                                .addGap(55, 55, 55)
-                                .addComponent(jtxtDispoblesL)))))
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnBuscarLibro, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(97, 97, 97))
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addGap(20, 20, 20)
                     .addComponent(jBusquedaL)
-                    .addContainerGap(316, Short.MAX_VALUE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(btnReiniciarL, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnBuscarLibro, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jtxtCodigoL, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(50, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(jBusquedaL)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSearch)
-                    .addComponent(jtxtSearchLibros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(82, 82, 82)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
                     .addComponent(jtxtCodigoL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5)
-                    .addComponent(jtxtPaginas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(23, 23, 23)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel13)
-                        .addComponent(jtxtDispoblesL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel3)
-                        .addComponent(jtxtTituloL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(27, 27, 27)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jtxtAutor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
-                .addComponent(btnBuscarLibro))
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addGap(71, 71, 71)
-                    .addComponent(jBusquedaL)
-                    .addContainerGap(185, Short.MAX_VALUE)))
+                    .addComponent(btnBuscarLibro))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28)
+                .addComponent(btnReiniciarL)
+                .addContainerGap(126, Short.MAX_VALUE))
         );
 
         jTableRevistas.setModel(new javax.swing.table.DefaultTableModel(
@@ -339,98 +279,56 @@ public class Escrito extends javax.swing.JFrame {
         jLabel7.setText("Revistas");
 
         btnBuscarRevistas.setText("Buscar Revista");
-
-        btnSearch1.setText("Buscar");
+        btnBuscarRevistas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnBuscarRevistasMouseClicked(evt);
+            }
+        });
 
         jBusquedaR.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jBusquedaR.setText("Busqueda Avanzada");
+        jBusquedaR.setText("Busqueda Revistas");
 
-        jLabel8.setText("Codigo");
+        jLabel8.setText("Se busca atraves de codigo");
 
-        jLabel9.setText("Titulo");
-
-        jLabel10.setText("Editorial");
-
-        jLabel11.setText("Fecha de publicacion");
-
-        jFtxtFecha.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("YYYY-MM-DD"))));
-        jFtxtFecha.setText("YYYY-MM-DD");
-
-        jLabel12.setText("Disponibles");
-        jLabel12.setToolTipText("");
+        btnReiniciar.setText("Reiniciar Lista");
+        btnReiniciar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnReiniciarMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnBuscarRevistas, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(51, 51, 51))
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jBusquedaR)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(btnSearch1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jtxtSearchRevistas)
-                        .addGap(16, 16, 16))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(btnReiniciar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnBuscarRevistas, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jBusquedaR)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                                        .addComponent(jLabel10)
-                                        .addGap(16, 16, 16))
-                                    .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel8)
-                                            .addComponent(jLabel9))
-                                        .addGap(21, 21, 21)))
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jtxtCodigoR, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jtxtEditorial1)
-                                        .addComponent(jtxtTituloR, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(52, 52, 52)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel12)
-                                    .addComponent(jLabel11))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jFtxtFecha, javax.swing.GroupLayout.DEFAULT_SIZE, 97, Short.MAX_VALUE)
-                                    .addComponent(jtxtDispoblesR))))
-                        .addGap(54, 54, 54))))
+                            .addComponent(jLabel8)
+                            .addComponent(jtxtCodigoR, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSearch1)
-                    .addComponent(jtxtSearchRevistas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
                 .addComponent(jBusquedaR)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
-                    .addComponent(jtxtCodigoR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel11)
-                    .addComponent(jFtxtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(22, 22, 22)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(jtxtTituloR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel12)
-                    .addComponent(jtxtDispoblesR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(25, 25, 25)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10)
-                    .addComponent(jtxtEditorial1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnBuscarRevistas)
-                .addContainerGap())
+                    .addComponent(btnBuscarRevistas)
+                    .addComponent(jtxtCodigoR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel8)
+                .addGap(29, 29, 29)
+                .addComponent(btnReiniciar)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -472,7 +370,7 @@ public class Escrito extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -507,6 +405,104 @@ public class Escrito extends javax.swing.JFrame {
         btnRegresar.setBackground(new Color(255,255,255));
     }//GEN-LAST:event_btnRegresarMouseExited
 
+    private void btnBuscarLibroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarLibroActionPerformed
+        // TODO add your handling code here:
+        
+        
+        
+    }//GEN-LAST:event_btnBuscarLibroActionPerformed
+
+    private void btnBuscarRevistasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarRevistasMouseClicked
+        if (jtxtCodigoR.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "El campo Codigo no puede estar en blanco.", "Error",
+                    JOptionPane.ERROR_MESSAGE);
+        } else if (!MaterialRevista.localizarMaterialRevista(jtxtCodigoR.getText().trim())) {
+            JOptionPane.showMessageDialog(null, "No existe este codigo, resgistrado"
+                    + "\n Imposible buscar",
+                    "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            Revista = MaterialRevista.seleccionarMaterialRevista(jtxtCodigoR.getText().trim());
+            cargartablebusquedaRevistas(Revista);
+            jtxtCodigoR.setText(null);
+    }//GEN-LAST:event_btnBuscarRevistasMouseClicked
+    }
+    
+    private void btnReiniciarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReiniciarMouseClicked
+        // TODO add your handling code here:
+         DefaultTableModel tblModelRevistas = (DefaultTableModel)jTableRevistas.getModel();
+         while (tblModelRevistas.getRowCount()>0)
+          {
+             tblModelRevistas.removeRow(0);
+          }
+         cargarTableRevistas();
+         jtxtCodigoR.setText(null);
+    }//GEN-LAST:event_btnReiniciarMouseClicked
+
+    private void btnReiniciarLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReiniciarLActionPerformed
+        // TODO add your handling code here:
+        
+         DefaultTableModel tblModelLibros = (DefaultTableModel)jTableLibros.getModel();
+         while (tblModelLibros.getRowCount()>0)
+          {
+             tblModelLibros.removeRow(0);
+          }
+       cargarTableLibros();
+       jtxtCodigoL.setText(null);
+    }//GEN-LAST:event_btnReiniciarLActionPerformed
+
+    private void btnBuscarLibroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarLibroMouseClicked
+        // TODO add your handling code here:
+        if (jtxtCodigoL.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "El campo Codigo no puede estar en blanco.", "Error",
+                    JOptionPane.ERROR_MESSAGE);
+        } else if (!MaterialLibro.localizarMaterialLibro(jtxtCodigoL.getText().trim())) {
+            JOptionPane.showMessageDialog(null, "No existe este codigo, resgistrado"
+                    + "\n Imposible buscar",
+                    "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            Libro = MaterialLibro.seleccionarMaterialLibro(jtxtCodigoL.getText().trim());
+            cargartablebusquedaLibros(Libro);
+             jtxtCodigoL.setText(null);
+    }//GEN-LAST:event_btnBuscarLibroMouseClicked
+    }
+    
+    
+     private void cargartablebusquedaLibros(MaterialLibroClases Libro){
+        String id = Libro.getidInterno();
+         String titulo = Libro.gettitulo();
+         String autor = Libro.getautor();
+         String numPaginas = String.valueOf(Libro.getnumPaginas());
+         String editorial = Libro.geteditorial();
+         String unidades = String.valueOf(Libro.getuniDispo());
+         
+         //Arreglo de datos
+         String tbData[] = {id, titulo, autor,numPaginas, editorial, editorial, unidades};
+         DefaultTableModel libros = (DefaultTableModel)jTableLibros.getModel();
+         
+         //Agregando arreglo a la tabla
+         libros.setRowCount(0);
+         libros.addRow(tbData);  
+    }
+    
+    private void cargartablebusquedaRevistas(MaterialRevistaClases Revista){
+        String id = Revista.getidInterno();
+         String titulo = Revista.gettitulo();
+         String editorial = Revista.geteditorial();
+         String disponibles = String.valueOf(Revista.getuniDispo());
+         String fecha = Revista.getfechaPubli();
+         
+         //Arreglo de datos
+         String tbData[] = {id, titulo, editorial, fecha, disponibles};
+         DefaultTableModel tblModelRevistas = (DefaultTableModel)jTableRevistas.getModel();
+         
+         //Agregando arreglo a la tabla
+         tblModelRevistas.setRowCount(0);
+         tblModelRevistas.addRow(tbData);  
+    }
+    
+   
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -546,23 +542,13 @@ public class Escrito extends javax.swing.JFrame {
     private javax.swing.JButton btnBuscarLibro;
     private javax.swing.JButton btnBuscarRevistas;
     private javax.swing.JLabel btnRegresar;
-    private javax.swing.JButton btnSearch;
-    private javax.swing.JButton btnSearch1;
+    private javax.swing.JButton btnReiniciar;
+    private javax.swing.JButton btnReiniciarL;
     private javax.swing.JLabel jBusquedaL;
     private javax.swing.JLabel jBusquedaR;
-    private javax.swing.JFormattedTextField jFtxtFecha;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -570,17 +556,9 @@ public class Escrito extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTableLibros;
     private javax.swing.JTable jTableRevistas;
-    private javax.swing.JTextField jtxtAutor;
     private javax.swing.JTextField jtxtCodigoL;
     private javax.swing.JTextField jtxtCodigoR;
-    private javax.swing.JTextField jtxtDispoblesL;
-    private javax.swing.JTextField jtxtDispoblesR;
-    private javax.swing.JTextField jtxtEditorial1;
-    private javax.swing.JTextField jtxtPaginas;
-    private javax.swing.JTextField jtxtSearchLibros;
-    private javax.swing.JTextField jtxtSearchRevistas;
-    private javax.swing.JTextField jtxtTituloL;
-    private javax.swing.JTextField jtxtTituloR;
+    private java.awt.Label label1;
     private javax.swing.JLabel txtAgregar;
     // End of variables declaration//GEN-END:variables
 }

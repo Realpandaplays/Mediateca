@@ -105,6 +105,8 @@ public class MaterialRevista {
         return materialRevista;
     }
     
+    
+    
     //Seleccionar todos las revistas
     
     public List<MaterialRevistaClases> Seleccionartodos() {
