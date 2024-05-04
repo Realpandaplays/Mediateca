@@ -1,6 +1,7 @@
 
 package VistasPrincipales;
 
+import Vistas.cd.ConsultarCD;
 import Vistas.libro.Borrar;
 import Vistas.libro.Consultar;
 import Vistas.revista.ConsultarR;
@@ -546,7 +547,10 @@ public class menuConsultar extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRevistaMouseClicked
 
     private void btnCdMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCdMouseClicked
-        // TODO add your handling code here:
+        /*TODO add your handling code here:*/
+        ConsultarCD cCD = new ConsultarCD();
+        cCD.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnCdMouseClicked
 
     private void btnDvdMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDvdMouseClicked
