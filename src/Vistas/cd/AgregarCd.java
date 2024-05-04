@@ -452,7 +452,7 @@ public class AgregarCd extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "El campo Editorial no puede quedar en blanco",
                     "Error", JOptionPane.ERROR_MESSAGE);
         } else if (!txtDuracion.getText().matches("[0-9]+")){
-            JOptionPane.showMessageDialog(null, "El campo Año de Publicación solo puede contener numeros",
+            JOptionPane.showMessageDialog(null, "El campo duracion solo puede contener numeros",
                     "Error", JOptionPane.ERROR_MESSAGE);
         } else if (!txtUnidades.getText().matches("[0-9]+")){
             JOptionPane.showMessageDialog(null, "El campo Unidades disponibles solo puede contener numeros",

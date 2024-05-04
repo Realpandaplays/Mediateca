@@ -598,8 +598,7 @@ public class ModificarCD extends javax.swing.JFrame {
             String numCanciones = txtNumero.getText();
             String uniDisp = txtUnidades.getText();
 
-            MaterialCDClases MaterialClases = new MaterialCDClases(idInterno, titulo, artista, duracion, genero,
-                    numCanciones, uniDisp);
+            MaterialCDClases MaterialClases = new MaterialCDClases(idInterno, titulo, artista, genero, duracion, numCanciones, uniDisp);
 
             if (MaterialCD.ActualizarMaterialCD(MaterialClases)) {
                 JOptionPane.showMessageDialog(this, "Material actualizado correctamente", "Actualizar Material",

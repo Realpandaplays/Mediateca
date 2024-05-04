@@ -25,10 +25,8 @@ public class MaterialCDClases {
             this.duracion = duracion;
             this.numCanciones = numCanciones;
             this.uniDisp = uniDisp;
-            }
-
-    
-         
+        }
+        
         public String getidInterno() {
         return idInterno;
         }

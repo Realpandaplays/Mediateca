@@ -27,7 +27,7 @@ public class MaterialCD {
         boolean rowInserted = false;
         
         try {
-            String sql = "INSERT INTO cd (idInterno, titulo, artista, genero"
+            String sql = "INSERT INTO cd (idInterno, titulo, artista, genero,"
                     + "duracion, numCanciones, uniDisp) "
                     + "VALUES (?,?,?,?,?,?,?)";
         java.sql.PreparedStatement statement = conexion.prepareStatement(sql);
@@ -108,7 +108,7 @@ public class MaterialCD {
     List<MaterialCDClases> materialCDs = new ArrayList<>();
     
     try {
-        String sql = "SELECT *FROM cd";
+        String sql = "SELECT * FROM cd";
         
          Statement statement = conexion.createStatement();
          ResultSet resultSet = statement.executeQuery(sql);
@@ -122,8 +122,8 @@ public class MaterialCD {
              String numCanciones = resultSet.getString("numCanciones");
              String uniDisp = resultSet.getString("uniDisp");
              
-             MaterialCDClases materialCD = new MaterialCDClases (idInterno, titulo, artista, duracion, genero, numCanciones, uniDisp);
-             materialCD.add(materialCDs);
+             MaterialCDClases materialCD1 = new MaterialCDClases (idInterno, titulo, artista, genero, duracion, numCanciones, uniDisp);
+             materialCD1.add(materialCDs);
          }
             resultSet.close();
             statement.close();
@@ -139,8 +139,8 @@ public class MaterialCD {
         
         try {
             String sql = "UPDATE cd SET titulo = ?, "
-                    + " autor = ?, numPaginas = ?, editorial = ?, ISBN = ?,"
-                    + " yearPubli = ?, uniDispo = ?"
+                    + " artista = ?, genero = ?, numCanciones = ?, duracion = ?,"
+                    + " uniDisp = ?"
                     + " WHERE idInterno = ?";
             
             try (PreparedStatement statement = conexion.prepareStatement(sql)) {

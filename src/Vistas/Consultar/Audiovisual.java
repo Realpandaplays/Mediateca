@@ -33,6 +33,7 @@ public class Audiovisual extends javax.swing.JFrame {
     
     private void cargarTxt(MaterialCDClases MaterialClases) {
 
+        /**
         txtCodigo.setText(MaterialClases.getidInterno());
         txtTitulo.setText(MaterialClases.gettitulo());
         txtArtista.setText(MaterialClases.getartista());
@@ -40,7 +41,7 @@ public class Audiovisual extends javax.swing.JFrame {
         txtDuracion.setText(Integer.toString(MaterialClases.getduracion()));
         txtNumero.setText(Integer.toString(MaterialClases.getnumCanciones()));
         txtDisponible.setText(Integer.toString(MaterialClases.getuniDisp()));
-
+        **/
     }
     public Audiovisual() {
         initComponents();
