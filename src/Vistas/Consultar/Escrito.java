@@ -470,7 +470,7 @@ public class Escrito extends javax.swing.JFrame {
     
     
      private void cargartablebusquedaLibros(MaterialLibroClases Libro){
-        String id = Libro.getidInterno();
+         String id = Libro.getidInterno();
          String titulo = Libro.gettitulo();
          String autor = Libro.getautor();
          String numPaginas = String.valueOf(Libro.getnumPaginas());
