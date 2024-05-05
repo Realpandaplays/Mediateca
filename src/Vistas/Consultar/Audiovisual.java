@@ -487,10 +487,10 @@ public class Audiovisual extends javax.swing.JFrame {
         String titulo = CD.gettitulo();
         String artista = CD.getartista();
         String genero = CD.getgenero();
-        String numCanciones = CD.getnumCanciones();
-        String UniDispo = CD.getuniDisp();
+        String numCanciones = String.valueOf(CD.getnumCanciones());
+        String UniDispo = String.valueOf(CD.getuniDisp());
          //Arreglo de datos
-         String tbData[] = {artista, genero, id, numCanciones, titulo, UniDispo};
+         String tbData[] = {id, titulo, artista, genero, numCanciones, UniDispo};
          DefaultTableModel CdMostrar = (DefaultTableModel)jTableCD.getModel();
          
          //Agregando arreglo a la tabla

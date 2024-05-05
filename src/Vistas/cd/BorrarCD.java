@@ -39,10 +39,9 @@ public class BorrarCD extends javax.swing.JFrame {
         txtTitulo.setText(CD.gettitulo());
         txtArtista.setText(CD.getartista());
         txtGenero.setText(CD.getgenero());
-        txtDuracion.setText(CD.getduracion());
-        txtNumero.setText(CD.getnumCanciones());
-        txtUnidades.setText(CD.getuniDisp());
-
+        txtDuracion.setText(String.valueOf(CD.getduracion()));
+        txtNumero.setText(String.valueOf(CD.getnumCanciones()));
+        txtUnidades.setText(String.valueOf(CD.getuniDisp()));
     }
     
     public BorrarCD() {

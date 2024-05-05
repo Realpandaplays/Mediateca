@@ -39,9 +39,9 @@ public class ModificarCD extends javax.swing.JFrame {
         txtTitulo.setText(CD.gettitulo());
         txtArtista.setText(CD.getartista());
         txtGenero.setText(CD.getgenero());
-        txtDuracion.setText(CD.getduracion());
-        txtNumero.setText(CD.getnumCanciones());
-        txtUnidades.setText(CD.getuniDisp());
+        txtDuracion.setText(String.valueOf(CD.getduracion()));
+        txtNumero.setText(String.valueOf(CD.getnumCanciones()));
+        txtUnidades.setText(String.valueOf(CD.getuniDisp()));
 
     }
     
@@ -600,11 +600,10 @@ public class ModificarCD extends javax.swing.JFrame {
             String titulo = txtTitulo.getText();
             String artista = txtArtista.getText();
             String genero = txtGenero.getText();
-            String duracion = txtDuracion.getText();
-            String numCanciones = txtNumero.getText();
-            String uniDisp = txtUnidades.getText();
-            MaterialCDClases MaterialClases = new MaterialCDClases(idInterno, titulo, artista, genero, duracion,
-                    numCanciones, uniDisp);
+            int duracion = Integer.parseInt(txtDuracion.getText());
+            int numCanciones = Integer.parseInt(txtNumero.getText());
+            int uniDisp = Integer.parseInt(txtUnidades.getText());
+            MaterialCDClases MaterialClases = new MaterialCDClases(idInterno, titulo, artista, genero, duracion, numCanciones, uniDisp);
             if (MaterialCD.ActualizarMaterialCD(MaterialClases)) {
                     JOptionPane.showMessageDialog(this, "Material actualizado correctamente", "Actualizar Material",
                         JOptionPane.INFORMATION_MESSAGE);
