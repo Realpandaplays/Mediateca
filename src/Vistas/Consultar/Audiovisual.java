@@ -171,7 +171,7 @@ public class Audiovisual extends javax.swing.JFrame {
         txtAgregar.setFont(new java.awt.Font("Rockwell", 1, 36)); // NOI18N
         txtAgregar.setForeground(new java.awt.Color(255, 255, 255));
         txtAgregar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        txtAgregar.setText("MATERIAL ESCRITO");
+        txtAgregar.setText("MATERIAL AUDIOVISUAL");
         txtAgregar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 txtAgregarMouseEntered(evt);
