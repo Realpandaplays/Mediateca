@@ -20,14 +20,14 @@ import javax.swing.JOptionPane;
 public class AgregarDvd extends javax.swing.JFrame {
 
     private MaterialDVD MaterialDVD = new MaterialDVD ((Connection) ConexionMySQL.obtenerConexion());
-    
+
     private void limpiarCajas(){
         txtId.setText(null);
         txtTitulo.setText(null);
         txtDirector.setText(null);
         txtGenero.setText(null);
         txtDuracion.setText(null);
-        
+
     }
     public AgregarDvd() {
         initComponents();
@@ -409,7 +409,7 @@ public class AgregarDvd extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRegresarMouseExited
 
     private void btnGuardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarMouseClicked
-        if(txtId.getText().trim().isEmpty()){
+        /*if(txtId.getText().trim().isEmpty()){
             JOptionPane.showMessageDialog(null, "El campo Codigo no puede quedar en blanco",
                     "Error", JOptionPane.ERROR_MESSAGE);
         } else if (txtTitulo.getText().trim().isEmpty()){
@@ -442,7 +442,7 @@ public class AgregarDvd extends javax.swing.JFrame {
             }
         }
             limpiarCajas();
-            txtId.requestFocus();
+            txtId.requestFocus();*/
     }//GEN-LAST:event_btnGuardarMouseClicked
 
     private void btnNuevoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNuevoMouseClicked

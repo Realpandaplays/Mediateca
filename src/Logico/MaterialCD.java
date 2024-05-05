@@ -49,9 +49,12 @@ public class MaterialCD {
         return rowInserted;
     }
     
-     public boolean localizarMaterialCD (String idInterno){
-        boolean encontrado = false;   
-       try {
+
+    /*localizar por Código Interno*/
+    public boolean localizarMaterialCD (String idInterno){
+        boolean encontrado = false;
+        
+        try {
             String sql = "SELECT * FROM cd WHERE idInterno = ?";
             java.sql.PreparedStatement statement = conexion.prepareStatement(sql);
             statement.setString(1, idInterno);
@@ -121,7 +124,6 @@ public class MaterialCD {
              String duracion = resultSet.getString("duracion");
              String numCanciones = resultSet.getString("numCanciones");
              String uniDisp = resultSet.getString("uniDisp");
-             
              MaterialCDClases materialCD1 = new MaterialCDClases (idInterno, titulo, artista, genero, duracion, numCanciones, uniDisp);
              materialCD1.add(materialCDs);
          }
@@ -138,21 +140,15 @@ public class MaterialCD {
         boolean rowUpdated = false;
         
         try {
-            String sql = "UPDATE cd SET titulo = ?, "
-                    + " artista = ?, genero = ?, numCanciones = ?, duracion = ?,"
-                    + " uniDisp = ?"
-                    + " WHERE idInterno = ?";
-            
+            String sql = "UPDATE cd SET titulo = ?, artista = ?, genero = ?, duracion = ?, numCanciones = ?, uniDisp = ? WHERE idInterno = ?";
             try (PreparedStatement statement = conexion.prepareStatement(sql)) {
                 statement.setString(1, MaterialCD.gettitulo());
                 statement.setString(2, MaterialCD.getartista());
                 statement.setString(3, MaterialCD.getgenero());
-                statement.setString(5, MaterialCD.getnumCanciones());
-                statement.setString(6, MaterialCD.getduracion());
-                statement.setString(7, MaterialCD.getuniDisp());
-                
-                statement.setString(8, MaterialCD.getidInterno());
-                
+                statement.setInt(4, MaterialCD.getnumCanciones());
+                statement.setInt(5, MaterialCD.getduracion());
+                statement.setInt(6, MaterialCD.getuniDisp());
+                statement.setString(7, MaterialCD.getidInterno());
                 rowUpdated = statement.executeUpdate()>0;
             }
         }catch (SQLException ex) {

@@ -615,7 +615,7 @@ public class Modificar extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRegresarMouseClicked
 
     private void btnActualizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnActualizarMouseClicked
-         txtId.setEnabled(false);
+        txtId.setEnabled(false);
 
         txtTitulo.setEnabled(true);
         txtAutor.setEnabled(true);
