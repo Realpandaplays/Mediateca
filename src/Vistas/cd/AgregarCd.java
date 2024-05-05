@@ -438,14 +438,14 @@ public class AgregarCd extends javax.swing.JFrame {
         } else if (txtArtista.getText().trim().isEmpty()){
             JOptionPane.showMessageDialog(null, "El campo Artista no puede quedar en blanco",
                     "Error", JOptionPane.ERROR_MESSAGE);
-        } else if (!txtNumero.getText().matches("[0-9]+")){
-            JOptionPane.showMessageDialog(null, "El campo Numero de Canciones solo puede contener numeros",
-                    "Error", JOptionPane.ERROR_MESSAGE);
         } else if (txtGenero.getText().trim().isEmpty()){
             JOptionPane.showMessageDialog(null, "El campo Genero no puede quedar en blanco",
                     "Error", JOptionPane.ERROR_MESSAGE);
         } else if (!txtDuracion.getText().matches("[0-9]+")){
             JOptionPane.showMessageDialog(null, "El campo Duracion de Publicación solo puede contener numeros",
+                    "Error", JOptionPane.ERROR_MESSAGE);
+        } else if (!txtNumero.getText().matches("[0-9]+")){
+            JOptionPane.showMessageDialog(null, "El campo Numero de Canciones solo puede contener numeros",
                     "Error", JOptionPane.ERROR_MESSAGE);
         } else if (!txtUnidades.getText().matches("[0-9]+")){
             JOptionPane.showMessageDialog(null, "El campo Unidades disponibles solo puede contener numeros",
@@ -454,9 +454,9 @@ public class AgregarCd extends javax.swing.JFrame {
             String idInterno = txtId.getText();
             String titulo = txtTitulo.getText();
             String artista = txtArtista.getText();
-            int numCanciones = Integer.parseInt(txtNumero.getText());
             String genero = txtGenero.getText();
             int duracion = Integer.parseInt(txtDuracion.getText());
+            int numCanciones = Integer.parseInt(txtNumero.getText());
             int uniDisp = Integer.parseInt(txtUnidades.getText());
             
             MaterialCDClases MaterialCDClases = new MaterialCDClases(idInterno, titulo, artista, genero, duracion,
