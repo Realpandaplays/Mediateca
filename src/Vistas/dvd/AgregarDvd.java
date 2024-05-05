@@ -404,7 +404,7 @@ public class AgregarDvd extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRegresarMouseExited
 
     private void btnGuardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarMouseClicked
-        /*if(txtId.getText().trim().isEmpty()){
+        if(txtId.getText().trim().isEmpty()){
             JOptionPane.showMessageDialog(null, "El campo Codigo no puede quedar en blanco",
                     "Error", JOptionPane.ERROR_MESSAGE);
         } else if (txtTitulo.getText().trim().isEmpty()){
