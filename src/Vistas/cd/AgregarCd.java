@@ -69,31 +69,24 @@ public class AgregarCd extends javax.swing.JFrame {
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel3.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Código de identificación:");
 
         jLabel4.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Titulo:");
 
         jLabel5.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("Artista:");
 
         jLabel6.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
         jLabel6.setText("Número de canciones:");
 
         jLabel7.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
         jLabel7.setText("Género:");
 
         jLabel9.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel9.setText("Duración:");
+        jLabel9.setText("Duración (Min):");
 
         jLabel10.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(0, 0, 0));
         jLabel10.setText("Unidades Disponibles:");
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
@@ -244,14 +237,14 @@ public class AgregarCd extends javax.swing.JFrame {
                             .addComponent(jLabel7)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                             .addComponent(txtGenero, javax.swing.GroupLayout.PREFERRED_SIZE, 513, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createSequentialGroup()
                             .addComponent(jLabel6)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(txtNumero)
-                            .addGap(18, 18, 18)
-                            .addComponent(jLabel9)
+                            .addComponent(txtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(txtDuracion, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jLabel9)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(txtDuracion, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jLabel10)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -269,7 +262,7 @@ public class AgregarCd extends javax.swing.JFrame {
                             .addComponent(jLabel5)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                             .addComponent(txtArtista, javax.swing.GroupLayout.PREFERRED_SIZE, 521, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(51, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -443,16 +436,16 @@ public class AgregarCd extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "El campo Titulo no puede quedar en blanco",
                     "Error", JOptionPane.ERROR_MESSAGE);
         } else if (txtArtista.getText().trim().isEmpty()){
-            JOptionPane.showMessageDialog(null, "El campo Autor no puede quedar en blanco",
-                    "Error", JOptionPane.ERROR_MESSAGE);
-        } else if (!txtNumero.getText().matches("[0-9]+")){
-            JOptionPane.showMessageDialog(null, "El campo Numero de Paginas solo puede contener numeros",
+            JOptionPane.showMessageDialog(null, "El campo Artista no puede quedar en blanco",
                     "Error", JOptionPane.ERROR_MESSAGE);
         } else if (txtGenero.getText().trim().isEmpty()){
-            JOptionPane.showMessageDialog(null, "El campo Editorial no puede quedar en blanco",
+            JOptionPane.showMessageDialog(null, "El campo Genero no puede quedar en blanco",
                     "Error", JOptionPane.ERROR_MESSAGE);
         } else if (!txtDuracion.getText().matches("[0-9]+")){
-            JOptionPane.showMessageDialog(null, "El campo duracion solo puede contener numeros",
+            JOptionPane.showMessageDialog(null, "El campo Duracion de Publicación solo puede contener numeros",
+                    "Error", JOptionPane.ERROR_MESSAGE);
+        } else if (!txtNumero.getText().matches("[0-9]+")){
+            JOptionPane.showMessageDialog(null, "El campo Numero de Canciones solo puede contener numeros",
                     "Error", JOptionPane.ERROR_MESSAGE);
         } else if (!txtUnidades.getText().matches("[0-9]+")){
             JOptionPane.showMessageDialog(null, "El campo Unidades disponibles solo puede contener numeros",
@@ -461,14 +454,12 @@ public class AgregarCd extends javax.swing.JFrame {
             String idInterno = txtId.getText();
             String titulo = txtTitulo.getText();
             String artista = txtArtista.getText();
-            String numCanciones = txtNumero.getText();
             String genero = txtGenero.getText();
-            String duracion = txtDuracion.getText();
-            String uniDisp = txtUnidades.getText();
-            
+            int duracion = Integer.parseInt(txtDuracion.getText());
+            int numCanciones = Integer.parseInt(txtNumero.getText());
+            int uniDisp = Integer.parseInt(txtUnidades.getText());
             MaterialCDClases MaterialCDClases = new MaterialCDClases(idInterno, titulo, artista, genero, duracion,
                     numCanciones, uniDisp);
-            
             if (MaterialCD.MaterialCD(MaterialCDClases)){
                 JOptionPane.showMessageDialog(this, "Material guardado correctamente",
                         "Guardar material", JOptionPane.INFORMATION_MESSAGE);

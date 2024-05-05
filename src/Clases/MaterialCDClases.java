@@ -12,11 +12,11 @@ public class MaterialCDClases {
     private String titulo;
     private String artista;
     private String genero;
-    private String duracion;
-    private String numCanciones;
-    private String uniDisp;
+    private int duracion;
+    private int numCanciones;
+    private int uniDisp;
     
-        public MaterialCDClases (String idInterno, String titulo, String artista, String genero, String duracion, String numCanciones, String uniDisp) {
+        public MaterialCDClases (String idInterno, String titulo, String artista, String genero, int duracion, int numCanciones, int uniDisp) {
         
             this.idInterno = idInterno;
             this.titulo = titulo;
@@ -59,27 +59,27 @@ public class MaterialCDClases {
             this.genero = genero;
         }
         
-        public String getduracion() {
+        public int getduracion() {
             return duracion;
         }
         
-        public void setduracion(String duracion) {
+        public void setduracion(int duracion) {
             this.duracion = duracion;
         }
         
-        public String getnumCanciones() {
+        public int getnumCanciones() {
             return numCanciones;
         }
         
-        public void setnumCanciones(String numCanciones){
+        public void setnumCanciones(int numCanciones){
             this.numCanciones = numCanciones;
         }
         
-        public String getuniDisp() {
+        public int getuniDisp() {
             return uniDisp;
         }
         
-        public void setuniDisp(String uniDisp) {
+        public void setuniDisp(int uniDisp) {
             this.uniDisp = uniDisp;
         }
 

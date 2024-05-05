@@ -39,9 +39,9 @@ public class ModificarCD extends javax.swing.JFrame {
         txtTitulo.setText(CD.gettitulo());
         txtArtista.setText(CD.getartista());
         txtGenero.setText(CD.getgenero());
-        txtDuracion.setText(CD.getduracion());
-        txtNumero.setText(CD.getnumCanciones());
-        txtUnidades.setText(CD.getuniDisp());
+        txtDuracion.setText(String.valueOf(CD.getduracion()));
+        txtNumero.setText(String.valueOf(CD.getnumCanciones()));
+        txtUnidades.setText(String.valueOf(CD.getuniDisp()));
 
     }
     
@@ -120,7 +120,7 @@ public class ModificarCD extends javax.swing.JFrame {
         jLabel7.setText("Género:");
 
         jLabel9.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
-        jLabel9.setText("Duración:");
+        jLabel9.setText("Duración (Min):");
 
         jLabel10.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         jLabel10.setText("Unidades Disponibles:");
@@ -381,14 +381,14 @@ public class ModificarCD extends javax.swing.JFrame {
                                     .addComponent(jLabel6)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                     .addComponent(txtNumero)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(jLabel9)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(txtDuracion, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                    .addComponent(jLabel9)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(txtDuracion, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(253, 253, 253)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(51, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -436,7 +436,7 @@ public class ModificarCD extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Rockwell", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Consultar");
+        jLabel1.setText("Modificar");
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/cd 103x103.png"))); // NOI18N
 
@@ -570,43 +570,47 @@ public class ModificarCD extends javax.swing.JFrame {
     private void btnGuardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarMouseClicked
         if (txtTitulo.getText().trim().isEmpty()) {
             JOptionPane.showMessageDialog(null, "El campo titulo no puede estar en blanco.", "Error",
-                JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.ERROR_MESSAGE);
         } else if (txtArtista.getText().trim().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "El campo autor no puede estar en blanco.", "Error",
-                JOptionPane.ERROR_MESSAGE);
-        } else if (txtNumero.getText().trim().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "El campo Paginas no puede estar en blanco.", "Error",
-                JOptionPane.ERROR_MESSAGE);
-        } else if (!txtGenero.getText().matches("[0-9]+")) {
-            JOptionPane.showMessageDialog(null, "El campo Paginas solo puede contener numero.",
-                "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "El campo Autor no puede estar en blanco.", "Error",
+                    JOptionPane.ERROR_MESSAGE);
         } else if (txtDuracion.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "El campo Paginas no puede estar en blanco.", "Error",
+                    JOptionPane.ERROR_MESSAGE);
+        } else if (!txtDuracion.getText().matches("[0-9]+")) {
+            JOptionPane.showMessageDialog(null, "El campo Paginas solo puede contener numero.",
+                    "Error", JOptionPane.ERROR_MESSAGE);
+        } else if (txtGenero.getText().trim().isEmpty()) {
             JOptionPane.showMessageDialog(null, "El campo Editorial no puede estar en blanco.", "Error",
-                JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.ERROR_MESSAGE);
+        } else if (txtNumero.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "El campo año no puede estar en blanco.", "Error",
+                    JOptionPane.ERROR_MESSAGE);
+        } else if (!txtNumero.getText().matches("[0-9]+")) {
+            JOptionPane.showMessageDialog(null, "El campo año de publicacion solo puede contener numero.",
+                    "Error", JOptionPane.ERROR_MESSAGE);
         }  else if (txtUnidades.getText().trim().isEmpty()) {
             JOptionPane.showMessageDialog(null, "El campo Unidades no puede estar en blanco.",
-                "Error", JOptionPane.ERROR_MESSAGE);
+                    "Error", JOptionPane.ERROR_MESSAGE);
         } else if (!txtUnidades.getText().matches("[0-9]+")) {
             JOptionPane.showMessageDialog(null, "El campo unidades disponibles solo puede contener numero.",
-                "Error", JOptionPane.ERROR_MESSAGE);
+                    "Error", JOptionPane.ERROR_MESSAGE);
         } else {
             String idInterno = txtId.getText();
             String titulo = txtTitulo.getText();
             String artista = txtArtista.getText();
             String genero = txtGenero.getText();
-            String duracion = txtDuracion.getText();
-            String numCanciones = txtNumero.getText();
-            String uniDisp = txtUnidades.getText();
-
+            int duracion = Integer.parseInt(txtDuracion.getText());
+            int numCanciones = Integer.parseInt(txtNumero.getText());
+            int uniDisp = Integer.parseInt(txtUnidades.getText());
             MaterialCDClases MaterialClases = new MaterialCDClases(idInterno, titulo, artista, genero, duracion, numCanciones, uniDisp);
-
             if (MaterialCD.ActualizarMaterialCD(MaterialClases)) {
-                JOptionPane.showMessageDialog(this, "Material actualizado correctamente", "Actualizar Material",
-                    JOptionPane.INFORMATION_MESSAGE);
-            } else {
-                JOptionPane.showMessageDialog(this, "Error al momento de actualizar", "Actualizar Material",
-                    JOptionPane.ERROR_MESSAGE);
-            }
+                    JOptionPane.showMessageDialog(this, "Material actualizado correctamente", "Actualizar Material",
+                        JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Error al momento de actualizar", "Actualizar Material",
+                        JOptionPane.ERROR_MESSAGE);
+                }
             activar();
             txtId.requestFocus();
         }

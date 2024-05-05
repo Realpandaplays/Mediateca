@@ -280,9 +280,9 @@ public class menuListar extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRegresarMouseExited
 
     private void btnEscritoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEscritoMouseClicked
-        Vistas.Consultar.Escrito escrito = new  Vistas.Consultar.Escrito();
+       /* Vistas.Consultar.Escrito escrito = new  Vistas.Consultar.Escrito();
         escrito.setVisible(true);
-        this.dispose();
+        this.dispose();*/
     }//GEN-LAST:event_btnEscritoMouseClicked
 
     private void btnEscritoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEscritoMouseEntered
