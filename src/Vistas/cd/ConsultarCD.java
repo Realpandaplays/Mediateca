@@ -98,7 +98,7 @@ public class ConsultarCD extends javax.swing.JFrame {
         jLabel7.setText("Género:");
 
         jLabel9.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
-        jLabel9.setText("Duración:");
+        jLabel9.setText("Duración (Min):");
 
         jLabel10.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         jLabel10.setText("Unidades Disponibles:");
