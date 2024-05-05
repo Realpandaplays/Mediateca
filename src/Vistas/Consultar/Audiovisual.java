@@ -94,7 +94,7 @@ public class Audiovisual extends javax.swing.JFrame {
          
          while(rs.next()){
              
-         String id = String.valueOf(rs.getInt("idInterno"));
+         String id = rs.getString("idInterno");
          String titulo = rs.getString("titulo");
          String genero = rs.getString("genero");
          String director = rs.getString("director");
@@ -427,19 +427,19 @@ public class Audiovisual extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBuscarCDActionPerformed
 
     private void btnBuscarDVDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarDVDMouseClicked
-       /** if (txtCodigoDVD.getText().trim().isEmpty()) {
+       if (txtCodigoDVD.getText().trim().isEmpty()) {
             JOptionPane.showMessageDialog(null, "El campo Codigo no puede estar en blanco.", "Error",
                     JOptionPane.ERROR_MESSAGE);
-        } else if (!MaterialDVD.localizarMaterialRevista(txtCodigoDVD.getText().trim())) {
+        } else if (!MaterialDVD.localizarMaterialdvd(txtCodigoDVD.getText().trim())) {
             JOptionPane.showMessageDialog(null, "No existe este codigo, resgistrado"
                     + "\n Imposible buscar",
                     "Error", JOptionPane.ERROR_MESSAGE);
         } else {
-            Revista = MaterialRevista.seleccionarMaterialRevista(txtCodigoDVD.getText().trim());
-            cargartablebusquedaRevistas(Revista);
+            dvd = MaterialDVD.seleccionarMaterialdvd(txtCodigoDVD.getText().trim());
+            cargartablebusquedaDVD(dvd);
             txtCodigoDVD.setText(null);
     }//GEN-LAST:event_btnBuscarDVDMouseClicked
-    **/}
+  }
     
     private void btnReiniciarDVDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReiniciarDVDMouseClicked
         // TODO add your handling code here:
@@ -498,20 +498,19 @@ public class Audiovisual extends javax.swing.JFrame {
          CdMostrar.addRow(tbData);  
     }
     
-    private void cargartablebusquedaRevistas(MaterialRevistaClases Revista){
-            String id = Revista.getidInterno();
-         String titulo = Revista.gettitulo();
-         String editorial = Revista.geteditorial();
-         String disponibles = String.valueOf(Revista.getuniDispo());
-         String fecha = Revista.getfechaPubli();
+    private void cargartablebusquedaDVD(MaterialDVDClases dvd){
+            String id = dvd.getidInterno();
+            String titulo = dvd.gettitulo();
+            String genero = dvd.getgenero();
+            String director = dvd.getdirector();
          
          //Arreglo de datos
-         String tbData[] = {id, titulo, editorial, fecha, disponibles};
-         DefaultTableModel tblModelRevistas = (DefaultTableModel)jTableDVD.getModel();
+         String tbData[] = {id, titulo, genero, director};
+         DefaultTableModel tblDVD = (DefaultTableModel)jTableDVD.getModel();
          
          //Agregando arreglo a la tabla
-         tblModelRevistas.setRowCount(0);
-         tblModelRevistas.addRow(tbData);  
+         tblDVD.setRowCount(0);
+         tblDVD.addRow(tbData);  
     }
     
    
