@@ -6,7 +6,11 @@ package Vistas.dvd;
 
 import Clases.MaterialDVDClases;
 import Logico.MaterialDVD;
+import Vistas.libro.*;
+import Clases.MaterialLibroClases;
 import Logico.ConexionMySQL;
+import Logico.MaterialLibro;
+import VistasPrincipales.menuBorrar;
 import VistasPrincipales.menuConsultar;
 import java.awt.Color;
 import java.awt.Font;
@@ -22,13 +26,12 @@ public class ConsultarDVD extends javax.swing.JFrame {
     private MaterialDVD MaterialDVD = new MaterialDVD((Connection) ConexionMySQL.obtenerConexion());
     private MaterialDVDClases DVD = null;
 
-    private void limpiarCajas(){
+    private void limpiarCajas() {
         txtId.setText(null);
         txtTitulo.setText(null);
         txtDirector.setText(null);
         txtGenero.setText(null);
         txtDuracion.setText(null);
-
     }
 
     private void cargarCajas(MaterialDVDClases DVDclases) {
@@ -56,9 +59,9 @@ public class ConsultarDVD extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         txtId = new javax.swing.JTextField();
         txtTitulo = new javax.swing.JTextField();
-        txtAutor = new javax.swing.JTextField();
-        txtEditorial = new javax.swing.JTextField();
-        txtUnidades = new javax.swing.JTextField();
+        txtDirector = new javax.swing.JTextField();
+        txtGenero = new javax.swing.JTextField();
+        txtDuracion = new javax.swing.JTextField();
         jPanel5 = new javax.swing.JPanel();
         btnRegresar = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
@@ -86,7 +89,7 @@ public class ConsultarDVD extends javax.swing.JFrame {
         jLabel7.setText("Genero:");
 
         jLabel10.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
-        jLabel10.setText("Duracion:");
+        jLabel10.setText("Duracion(Min):");
 
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
         jPanel5.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -229,7 +232,7 @@ public class ConsultarDVD extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtAutor, javax.swing.GroupLayout.PREFERRED_SIZE, 533, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtDirector, javax.swing.GroupLayout.PREFERRED_SIZE, 533, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(499, 499, 499))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -252,11 +255,11 @@ public class ConsultarDVD extends javax.swing.JFrame {
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addComponent(jLabel10)
                                 .addGap(38, 38, 38)
-                                .addComponent(txtUnidades, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txtDuracion, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addComponent(jLabel7)
                                 .addGap(27, 27, 27)
-                                .addComponent(txtEditorial, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(txtGenero, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanel4Layout.setVerticalGroup(
@@ -275,15 +278,15 @@ public class ConsultarDVD extends javax.swing.JFrame {
                 .addGap(29, 29, 29)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(txtAutor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtDirector, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(29, 29, 29)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(txtEditorial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtGenero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(40, 40, 40)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
-                    .addComponent(txtUnidades, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtDuracion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(56, 56, 56)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -298,7 +301,7 @@ public class ConsultarDVD extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Consultar");
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/libro 103x103.png"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/dvd 103x103.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -329,7 +332,7 @@ public class ConsultarDVD extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 654, Short.MAX_VALUE))
+                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 654, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -478,14 +481,6 @@ public class ConsultarDVD extends javax.swing.JFrame {
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -511,10 +506,10 @@ public class ConsultarDVD extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JTextField txtAutor;
-    private javax.swing.JTextField txtEditorial;
+    private javax.swing.JTextField txtDirector;
+    private javax.swing.JTextField txtGenero;
     private javax.swing.JTextField txtId;
     private javax.swing.JTextField txtTitulo;
-    private javax.swing.JTextField txtUnidades;
+    private javax.swing.JTextField txtDuracion;
     // End of variables declaration//GEN-END:variables
 }
