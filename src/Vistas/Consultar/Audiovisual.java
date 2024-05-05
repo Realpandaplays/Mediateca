@@ -5,46 +5,114 @@
  */
 package Vistas.Consultar;
 import Clases.MaterialCDClases;
-
+import Clases.MaterialDVDClases;
+import Clases.MaterialLibroClases;
+import Clases.MaterialRevistaClases;
 import Logico.ConexionMySQL;
 import Logico.MaterialCD;
+import Logico.MaterialDVD;
+import Logico.MaterialLibro;
+import Logico.MaterialRevista;
 import java.awt.Color;
+import java.awt.Font;
 import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author kevin
  */
+//**Master bueno**/
+
 public class Audiovisual extends javax.swing.JFrame {
 
-    private MaterialCD MaterialCD = new MaterialCD((Connection) ConexionMySQL.obtenerConexion());
-    private MaterialCDClases MaterialClases = null;
+    private MaterialDVD MaterialDVD = new MaterialDVD ((Connection) ConexionMySQL.obtenerConexion());
+    private MaterialDVDClases dvd = null;
     
-    private void limpiarCajas(){
-        txtCodigo.setText(null);
-        txtTitulo.setText(null);
-        txtArtista.setText(null);
-        txtGenero.setText(null);
-        txtDuracion.setText(null);
-        txtNumero.setText(null);
-        txtDisponible.setText(null);
-               
-    }
+    private MaterialCD MaterialCD = new MaterialCD ((Connection) ConexionMySQL.obtenerConexion());
+    private MaterialCDClases CD = null;
     
-    private void cargarTxt(MaterialCDClases MaterialClases) {
-
-        /**
-        txtCodigo.setText(MaterialClases.getidInterno());
-        txtTitulo.setText(MaterialClases.gettitulo());
-        txtArtista.setText(MaterialClases.getartista());
-        txtGenero.setText(MaterialClases.getgenero());
-        txtDuracion.setText(Integer.toString(MaterialClases.getduracion()));
-        txtNumero.setText(Integer.toString(MaterialClases.getnumCanciones()));
-        txtDisponible.setText(Integer.toString(MaterialClases.getuniDisp()));
-        **/
-    }
+    /**
+     * Creates new form Escrito
+     */
     public Audiovisual() {
         initComponents();
+        cargarTableDVD();
+        cargarTableCD();
+    }
+    
+     private void cargarTableCD(){
+        
+         try{
+         Connection con = ConexionMySQL.obtenerConexion();
+         
+         Statement st = con.createStatement();
+         
+         String sql = "Select IdInterno, titulo, artista, genero, numCanciones, uniDisp from cd";
+         ResultSet rs = st.executeQuery(sql);
+         
+         while(rs.next()){
+             
+         String id = rs.getString("idInterno");
+         String titulo = rs.getString("titulo");
+         String artista = rs.getString("artista");
+         String genero = rs.getString("genero");
+         String numCanciones = String.valueOf(rs.getInt("numCanciones"));
+         String uniDispo = String.valueOf(rs.getInt("uniDisp"));
+         //Arreglo de datos
+         String tbData[] = {id, titulo, artista, genero, numCanciones, uniDispo};
+         DefaultTableModel tblModelCD = (DefaultTableModel)jTableCD.getModel();
+         
+         //Agregando arreglo a la tabla
+         tblModelCD.addRow(tbData);  
+         }
+        con.close();
+         
+         }
+         catch(Exception e){
+         
+         JOptionPane.showMessageDialog(null, "un error ha ocurrido"
+                    + e,
+                    "Error", JOptionPane.ERROR_MESSAGE);
+         }
+    }
+    
+     private void cargarTableDVD(){
+        
+         try{
+         Connection con = ConexionMySQL.obtenerConexion();
+         
+         Statement st = con.createStatement();
+         
+         String sql = "Select * from DVD";
+         ResultSet rs = st.executeQuery(sql);
+         
+         while(rs.next()){
+             
+         String id = String.valueOf(rs.getInt("idInterno"));
+         String titulo = rs.getString("titulo");
+         String genero = rs.getString("genero");
+         String director = rs.getString("director");
+         
+         //Arreglo de datos
+         String tbData[] = {id, titulo, genero, director};
+         DefaultTableModel tblModelRevistas = (DefaultTableModel)jTableDVD.getModel();
+         
+         //Agregando arreglo a la tabla
+         tblModelRevistas.addRow(tbData);  
+         }
+         }
+         catch(Exception e){
+         
+         JOptionPane.showMessageDialog(null, "un error ha ocurrido"
+                    + e,
+                    "Error", JOptionPane.ERROR_MESSAGE);
+         }
     }
 
     /**
@@ -56,35 +124,54 @@ public class Audiovisual extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTableCD = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
         txtAgregar = new javax.swing.JLabel();
-        btnBuscar = new javax.swing.JButton();
-        txtBusqueda = new javax.swing.JTextField();
-        jBusquedaL = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        txtCodigo = new javax.swing.JTextField();
         btnRegresar = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        txtTitulo = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        txtArtista = new javax.swing.JTextField();
+        jPanel1 = new javax.swing.JPanel();
+        btnBuscarCD = new javax.swing.JButton();
+        txtCodigoCD = new javax.swing.JTextField();
+        jBusquedaL = new javax.swing.JLabel();
+        label1 = new java.awt.Label();
+        btnReiniciarCD = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTableDVD = new javax.swing.JTable();
         jLabel6 = new javax.swing.JLabel();
-        txtGenero = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        txtDuracion = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        txtNumero = new javax.swing.JTextField();
+        jPanel3 = new javax.swing.JPanel();
+        btnBuscarDVD = new javax.swing.JButton();
+        jBusquedaR = new javax.swing.JLabel();
+        txtCodigoDVD = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        txtDisponible = new javax.swing.JTextField();
+        btnReiniciarDVD = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jTableCD.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Codigo", "Titulo", "Artista", "Genero", "Numero canciones", "UniDisponibles"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(jTableCD);
 
         jPanel2.setBackground(new java.awt.Color(134, 143, 146));
 
         txtAgregar.setFont(new java.awt.Font("Rockwell", 1, 36)); // NOI18N
         txtAgregar.setForeground(new java.awt.Color(255, 255, 255));
         txtAgregar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        txtAgregar.setText("MATERIAL AUDIOVISUAL");
+        txtAgregar.setText("MATERIAL ESCRITO");
         txtAgregar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 txtAgregarMouseEntered(evt);
@@ -93,37 +180,6 @@ public class Audiovisual extends javax.swing.JFrame {
                 txtAgregarMouseExited(evt);
             }
         });
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(171, Short.MAX_VALUE)
-                .addComponent(txtAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 630, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(217, 217, 217))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(36, 36, 36)
-                .addComponent(txtAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(47, Short.MAX_VALUE))
-        );
-
-        btnBuscar.setText("Buscar");
-        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBuscarActionPerformed(evt);
-            }
-        });
-
-        txtBusqueda.setName("txtBusqueda"); // NOI18N
-
-        jBusquedaL.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jBusquedaL.setText("Busqueda Avanzada");
-
-        jLabel2.setText("Codigo");
 
         btnRegresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/regreso (1).png"))); // NOI18N
         btnRegresar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -139,112 +195,203 @@ public class Audiovisual extends javax.swing.JFrame {
             }
         });
 
-        jLabel3.setText("Titulo");
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(txtAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 630, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(129, 129, 129)
+                .addComponent(btnRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(36, 36, 36)
+                .addComponent(txtAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(47, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
 
-        jLabel4.setText("Artista");
+        btnBuscarCD.setText("Buscar  CD");
+        btnBuscarCD.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnBuscarCDMouseClicked(evt);
+            }
+        });
+        btnBuscarCD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarCDActionPerformed(evt);
+            }
+        });
 
-        jLabel6.setText("Genero");
+        jBusquedaL.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jBusquedaL.setText("Busqueda CD");
 
-        jLabel1.setText("Duracion");
+        label1.setText("Se busca atraves de codigo");
 
-        jLabel7.setText("N. Canciones");
+        btnReiniciarCD.setText("Reiniciar Lista");
+        btnReiniciarCD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReiniciarCDActionPerformed(evt);
+            }
+        });
 
-        jLabel8.setText("Disponible");
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jBusquedaL)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(btnReiniciarCD, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnBuscarCD, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtCodigoCD, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(50, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jBusquedaL)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtCodigoCD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBuscarCD))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28)
+                .addComponent(btnReiniciarCD)
+                .addContainerGap(126, Short.MAX_VALUE))
+        );
+
+        jTableDVD.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Codigo", "Titulo", "Genero", "Director"
+            }
+        ));
+        jScrollPane2.setViewportView(jTableDVD);
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
+        jLabel6.setText("CD");
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
+        jLabel7.setText("DVD");
+
+        btnBuscarDVD.setText("Buscar DVD");
+        btnBuscarDVD.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnBuscarDVDMouseClicked(evt);
+            }
+        });
+
+        jBusquedaR.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jBusquedaR.setText("Busqueda DVD");
+
+        jLabel8.setText("Se busca atraves de codigo");
+
+        btnReiniciarDVD.setText("Reiniciar Lista");
+        btnReiniciarDVD.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnReiniciarDVDMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jBusquedaR)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(btnReiniciarDVD, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnBuscarDVD, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel8)
+                            .addComponent(txtCodigoDVD, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(34, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jBusquedaR)
+                .addGap(22, 22, 22)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnBuscarDVD)
+                    .addComponent(txtCodigoDVD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel8)
+                .addGap(29, 29, 29)
+                .addComponent(btnReiniciarDVD)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(38, 38, 38)
+                        .addGap(208, 208, 208)
+                        .addComponent(jLabel7))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 535, Short.MAX_VALUE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addGap(218, 218, 218)
+                            .addComponent(jLabel6))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(jScrollPane1))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jBusquedaL)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnBuscar)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtCodigo, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
-                                    .addComponent(txtTitulo)
-                                    .addComponent(txtArtista)
-                                    .addComponent(txtGenero))
-                                .addGap(41, 41, 41)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(28, 28, 28)
-                                        .addComponent(txtDuracion, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                            .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 77, Short.MAX_VALUE))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(txtNumero)
-                                            .addComponent(txtDisponible))))
-                                .addGap(24, 24, 24))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(36, 36, 36)
-                                .addComponent(txtBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(32, 32, 32))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(17, 17, 17)
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+                .addComponent(jLabel7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txtBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(165, 165, 165)
-                        .addComponent(btnBuscar)))
-                .addGap(18, 18, 18)
-                .addComponent(jBusquedaL)
-                .addGap(19, 19, 19)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1)
-                    .addComponent(txtDuracion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(txtTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7)
-                    .addComponent(txtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(txtArtista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8)
-                    .addComponent(txtDisponible, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(txtGenero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 179, Short.MAX_VALUE)
-                .addComponent(btnRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(21, 21, 21))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         pack();
@@ -272,24 +419,104 @@ public class Audiovisual extends javax.swing.JFrame {
         btnRegresar.setBackground(new Color(255,255,255));
     }//GEN-LAST:event_btnRegresarMouseExited
 
-    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        if (txtBusqueda.getText().trim().isEmpty()) {
+    private void btnBuscarCDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarCDActionPerformed
+        // TODO add your handling code here:
+        
+        
+        
+    }//GEN-LAST:event_btnBuscarCDActionPerformed
+
+    private void btnBuscarDVDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarDVDMouseClicked
+       /** if (txtCodigoDVD.getText().trim().isEmpty()) {
             JOptionPane.showMessageDialog(null, "El campo Codigo no puede estar en blanco.", "Error",
                     JOptionPane.ERROR_MESSAGE);
-        } else if (!MaterialCD.localizarMaterialCD(txtBusqueda.getText().trim())) {
+        } else if (!MaterialDVD.localizarMaterialRevista(txtCodigoDVD.getText().trim())) {
             JOptionPane.showMessageDialog(null, "No existe este codigo, resgistrado"
-                    + "\n Imposible modificar",
+                    + "\n Imposible buscar",
                     "Error", JOptionPane.ERROR_MESSAGE);
-            this.limpiarCajas();
-            txtBusqueda.setEnabled(true);
         } else {
-            MaterialClases = MaterialCD.seleccionarMaterialCD(txtBusqueda.getText().trim());
-            cargarTxt(MaterialClases);
-            txtBusqueda.setEnabled(false);
-            btnBuscar.requestFocus();
-        }
-    }//GEN-LAST:event_btnBuscarActionPerformed
+            Revista = MaterialRevista.seleccionarMaterialRevista(txtCodigoDVD.getText().trim());
+            cargartablebusquedaRevistas(Revista);
+            txtCodigoDVD.setText(null);
+    }//GEN-LAST:event_btnBuscarDVDMouseClicked
+    **/}
+    
+    private void btnReiniciarDVDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReiniciarDVDMouseClicked
+        // TODO add your handling code here:
+         DefaultTableModel tblModelDVD = (DefaultTableModel)jTableDVD.getModel();
+         while (tblModelDVD.getRowCount()>0)
+          {
+             tblModelDVD.removeRow(0);
+          }
+         cargarTableDVD();
+         txtCodigoDVD.setText(null);
+    }//GEN-LAST:event_btnReiniciarDVDMouseClicked
 
+    private void btnReiniciarCDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReiniciarCDActionPerformed
+        // TODO add your handling code here:
+        
+         DefaultTableModel tblModelCD = (DefaultTableModel)jTableCD.getModel();
+         while (tblModelCD.getRowCount()>0)
+          {
+             tblModelCD.removeRow(0);
+          }
+       cargarTableCD();
+       txtCodigoCD.setText(null);
+    }//GEN-LAST:event_btnReiniciarCDActionPerformed
+
+    private void btnBuscarCDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarCDMouseClicked
+        // TODO add your handling code here:
+        if (txtCodigoCD.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "El campo Codigo no puede estar en blanco.", "Error",
+                    JOptionPane.ERROR_MESSAGE);
+        } else if (!MaterialCD.localizarMaterialCD(txtCodigoCD.getText().trim())) {
+            JOptionPane.showMessageDialog(null, "No existe este codigo, resgistrado"
+                    + "\n Imposible buscar",
+                    "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            
+            CD = MaterialCD.seleccionarMaterialCD(txtCodigoCD.getText().trim());
+            cargartablebusquedaCD(CD);
+             txtCodigoCD.setText(null);
+    }//GEN-LAST:event_btnBuscarCDMouseClicked
+    }
+    
+    
+     private void cargartablebusquedaCD(MaterialCDClases CD){
+        String id = CD.getidInterno();
+        String titulo = CD.gettitulo();
+        String artista = CD.getartista();
+        String genero = CD.getgenero();
+        String numCanciones = CD.getnumCanciones();
+        String UniDispo = CD.getuniDisp();
+         //Arreglo de datos
+         String tbData[] = {artista, genero, id, numCanciones, titulo, UniDispo};
+         DefaultTableModel CdMostrar = (DefaultTableModel)jTableCD.getModel();
+         
+         //Agregando arreglo a la tabla
+         CdMostrar.setRowCount(0);
+         CdMostrar.addRow(tbData);  
+    }
+    
+    private void cargartablebusquedaRevistas(MaterialRevistaClases Revista){
+            String id = Revista.getidInterno();
+         String titulo = Revista.gettitulo();
+         String editorial = Revista.geteditorial();
+         String disponibles = String.valueOf(Revista.getuniDispo());
+         String fecha = Revista.getfechaPubli();
+         
+         //Arreglo de datos
+         String tbData[] = {id, titulo, editorial, fecha, disponibles};
+         DefaultTableModel tblModelRevistas = (DefaultTableModel)jTableDVD.getModel();
+         
+         //Agregando arreglo a la tabla
+         tblModelRevistas.setRowCount(0);
+         tblModelRevistas.addRow(tbData);  
+    }
+    
+   
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -317,8 +544,6 @@ public class Audiovisual extends javax.swing.JFrame {
         }
         //</editor-fold>
         //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -329,25 +554,26 @@ public class Audiovisual extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnBuscar;
+    private javax.swing.JButton btnBuscarCD;
+    private javax.swing.JButton btnBuscarDVD;
     private javax.swing.JLabel btnRegresar;
+    private javax.swing.JButton btnReiniciarCD;
+    private javax.swing.JButton btnReiniciarDVD;
     private javax.swing.JLabel jBusquedaL;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jBusquedaR;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTableCD;
+    private javax.swing.JTable jTableDVD;
+    private java.awt.Label label1;
     private javax.swing.JLabel txtAgregar;
-    private javax.swing.JTextField txtArtista;
-    private javax.swing.JTextField txtBusqueda;
-    private javax.swing.JTextField txtCodigo;
-    private javax.swing.JTextField txtDisponible;
-    private javax.swing.JTextField txtDuracion;
-    private javax.swing.JTextField txtGenero;
-    private javax.swing.JTextField txtNumero;
-    private javax.swing.JTextField txtTitulo;
+    private javax.swing.JTextField txtCodigoCD;
+    private javax.swing.JTextField txtCodigoDVD;
     // End of variables declaration//GEN-END:variables
 }

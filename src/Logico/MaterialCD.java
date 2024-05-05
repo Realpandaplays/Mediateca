@@ -91,7 +91,7 @@ public class MaterialCD {
                 String duracion = resultSet.getString("duracion");
                 String numCanciones = resultSet.getString("numCanciones");
                 String uniDisp = resultSet.getString("uniDisp");
-                materialCD = new MaterialCDClases (id, titulo, artista, genero, duracion, numCanciones, uniDisp);
+                materialCD = new MaterialCDClases (artista, duracion, genero, id, numCanciones, titulo, uniDisp);
             }
             resultSet.close();
             statement.close();
