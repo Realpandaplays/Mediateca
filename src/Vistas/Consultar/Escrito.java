@@ -4,13 +4,9 @@
  * and open the template in the editor.
  */
 package Vistas.Consultar;
-import Clases.MaterialCDClases;
-import Clases.MaterialDVDClases;
 import Clases.MaterialLibroClases;
 import Clases.MaterialRevistaClases;
 import Logico.ConexionMySQL;
-import Logico.MaterialCD;
-import Logico.MaterialDVD;
 import Logico.MaterialLibro;
 import Logico.MaterialRevista;
 import java.awt.Color;
@@ -29,47 +25,46 @@ import javax.swing.table.DefaultTableModel;
  */
 //**Master bueno**/
 
-public class Audiovisual extends javax.swing.JFrame {
+public class Escrito extends javax.swing.JFrame {
 
-    private MaterialDVD MaterialDVD = new MaterialDVD ((Connection) ConexionMySQL.obtenerConexion());
-    private MaterialDVDClases dvd = null;
-    
-    private MaterialCD MaterialCD = new MaterialCD ((Connection) ConexionMySQL.obtenerConexion());
-    private MaterialCDClases CD = null;
-    
+    private MaterialRevista MaterialRevista = new MaterialRevista ((Connection) ConexionMySQL.obtenerConexion());
+    private MaterialRevistaClases Revista = null;
+    private MaterialLibro MaterialLibro = new MaterialLibro ((Connection) ConexionMySQL.obtenerConexion());
+    private MaterialLibroClases Libro = null;
     /**
      * Creates new form Escrito
      */
-    public Audiovisual() {
+    public Escrito() {
         initComponents();
-        cargarTableDVD();
-        cargarTableCD();
+        cargarTableRevistas();
+        cargarTableLibros();
     }
     
-     private void cargarTableCD(){
+     private void cargarTableLibros(){
         
          try{
          Connection con = ConexionMySQL.obtenerConexion();
          
          Statement st = con.createStatement();
          
-         String sql = "Select IdInterno, titulo, artista, genero, numCanciones, uniDisp from cd";
+         String sql = "Select * from libros";
          ResultSet rs = st.executeQuery(sql);
          
          while(rs.next()){
              
          String id = rs.getString("idInterno");
          String titulo = rs.getString("titulo");
-         String artista = rs.getString("artista");
-         String genero = rs.getString("genero");
-         String numCanciones = String.valueOf(rs.getInt("numCanciones"));
-         String uniDispo = String.valueOf(rs.getInt("uniDisp"));
+         String autor = rs.getString("autor");
+          String numPaginas = String.valueOf(rs.getInt("numPaginas"));
+         String disponibles = String.valueOf(rs.getInt("uniDispo"));
+         String editorial = rs.getString("editorial");
+         
          //Arreglo de datos
-         String tbData[] = {id, titulo, artista, genero, numCanciones, uniDispo};
-         DefaultTableModel tblModelCD = (DefaultTableModel)jTableCD.getModel();
+         String tbData[] = {id, titulo, autor, numPaginas, editorial, disponibles};
+         DefaultTableModel tblModelLibros = (DefaultTableModel)jTableLibros.getModel();
          
          //Agregando arreglo a la tabla
-         tblModelCD.addRow(tbData);  
+         tblModelLibros.addRow(tbData);  
          }
         con.close();
          
@@ -82,26 +77,27 @@ public class Audiovisual extends javax.swing.JFrame {
          }
     }
     
-     private void cargarTableDVD(){
+     private void cargarTableRevistas(){
         
          try{
          Connection con = ConexionMySQL.obtenerConexion();
          
          Statement st = con.createStatement();
          
-         String sql = "Select * from DVD";
+         String sql = "Select * from Revistas";
          ResultSet rs = st.executeQuery(sql);
          
          while(rs.next()){
              
          String id = String.valueOf(rs.getInt("idInterno"));
          String titulo = rs.getString("titulo");
-         String genero = rs.getString("genero");
-         String director = rs.getString("director");
+         String editorial = rs.getString("editorial");
+         String disponibles = String.valueOf(rs.getInt("uniDispo"));
+         String fecha = rs.getString("fechaPubli");
          
          //Arreglo de datos
-         String tbData[] = {id, titulo, genero, director};
-         DefaultTableModel tblModelRevistas = (DefaultTableModel)jTableDVD.getModel();
+         String tbData[] = {id, titulo, editorial, fecha, disponibles};
+         DefaultTableModel tblModelRevistas = (DefaultTableModel)jTableRevistas.getModel();
          
          //Agregando arreglo a la tabla
          tblModelRevistas.addRow(tbData);  
@@ -125,53 +121,45 @@ public class Audiovisual extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTableCD = new javax.swing.JTable();
+        jTableLibros = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
         txtAgregar = new javax.swing.JLabel();
         btnRegresar = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        btnBuscarCD = new javax.swing.JButton();
-        txtCodigoCD = new javax.swing.JTextField();
+        btnBuscarLibro = new javax.swing.JButton();
+        jtxtCodigoL = new javax.swing.JTextField();
         jBusquedaL = new javax.swing.JLabel();
         label1 = new java.awt.Label();
-        btnReiniciarCD = new javax.swing.JButton();
+        btnReiniciarL = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTableDVD = new javax.swing.JTable();
+        jTableRevistas = new javax.swing.JTable();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        btnBuscarDVD = new javax.swing.JButton();
+        btnBuscarRevistas = new javax.swing.JButton();
         jBusquedaR = new javax.swing.JLabel();
-        txtCodigoDVD = new javax.swing.JTextField();
+        jtxtCodigoR = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        btnReiniciarDVD = new javax.swing.JButton();
+        btnReiniciar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTableCD.setModel(new javax.swing.table.DefaultTableModel(
+        jTableLibros.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Codigo", "Titulo", "Artista", "Genero", "Numero canciones", "UniDisponibles"
+                "Codigo", "Titulo", "Autor", "Num Paginas", "Editorial", "Unidades"
             }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
-        jScrollPane1.setViewportView(jTableCD);
+        ));
+        jScrollPane1.setViewportView(jTableLibros);
 
         jPanel2.setBackground(new java.awt.Color(134, 143, 146));
 
         txtAgregar.setFont(new java.awt.Font("Rockwell", 1, 36)); // NOI18N
         txtAgregar.setForeground(new java.awt.Color(255, 255, 255));
         txtAgregar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        txtAgregar.setText("MATERIAL AUDIOVISUAL");
+        txtAgregar.setText("MATERIAL ESCRITO");
         txtAgregar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 txtAgregarMouseEntered(evt);
@@ -218,27 +206,27 @@ public class Audiovisual extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        btnBuscarCD.setText("Buscar  CD");
-        btnBuscarCD.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnBuscarLibro.setText("Buscar  Libro");
+        btnBuscarLibro.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnBuscarCDMouseClicked(evt);
+                btnBuscarLibroMouseClicked(evt);
             }
         });
-        btnBuscarCD.addActionListener(new java.awt.event.ActionListener() {
+        btnBuscarLibro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBuscarCDActionPerformed(evt);
+                btnBuscarLibroActionPerformed(evt);
             }
         });
 
         jBusquedaL.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jBusquedaL.setText("Busqueda CD");
+        jBusquedaL.setText("Busqueda Libros");
 
         label1.setText("Se busca atraves de codigo");
 
-        btnReiniciarCD.setText("Reiniciar Lista");
-        btnReiniciarCD.addActionListener(new java.awt.event.ActionListener() {
+        btnReiniciarL.setText("Reiniciar Lista");
+        btnReiniciarL.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnReiniciarCDActionPerformed(evt);
+                btnReiniciarLActionPerformed(evt);
             }
         });
 
@@ -252,12 +240,12 @@ public class Audiovisual extends javax.swing.JFrame {
                     .addComponent(jBusquedaL)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(btnReiniciarCD, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnBuscarCD, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE))
+                            .addComponent(btnReiniciarL, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnBuscarLibro, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtCodigoCD, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jtxtCodigoL, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(50, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -267,47 +255,47 @@ public class Audiovisual extends javax.swing.JFrame {
                 .addComponent(jBusquedaL)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtCodigoCD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnBuscarCD))
+                    .addComponent(jtxtCodigoL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBuscarLibro))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28)
-                .addComponent(btnReiniciarCD)
+                .addComponent(btnReiniciarL)
                 .addContainerGap(126, Short.MAX_VALUE))
         );
 
-        jTableDVD.setModel(new javax.swing.table.DefaultTableModel(
+        jTableRevistas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Codigo", "Titulo", "Genero", "Director"
+                "Codigo", "Titulo", "Editorial", "Fecha de publicacion", "Disponibles"
             }
         ));
-        jScrollPane2.setViewportView(jTableDVD);
+        jScrollPane2.setViewportView(jTableRevistas);
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
-        jLabel6.setText("CD");
+        jLabel6.setText("Libros");
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
-        jLabel7.setText("DVD");
+        jLabel7.setText("Revistas");
 
-        btnBuscarDVD.setText("Buscar DVD");
-        btnBuscarDVD.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnBuscarRevistas.setText("Buscar Revista");
+        btnBuscarRevistas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnBuscarDVDMouseClicked(evt);
+                btnBuscarRevistasMouseClicked(evt);
             }
         });
 
         jBusquedaR.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jBusquedaR.setText("Busqueda DVD");
+        jBusquedaR.setText("Busqueda Revistas");
 
         jLabel8.setText("Se busca atraves de codigo");
 
-        btnReiniciarDVD.setText("Reiniciar Lista");
-        btnReiniciarDVD.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnReiniciar.setText("Reiniciar Lista");
+        btnReiniciar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnReiniciarDVDMouseClicked(evt);
+                btnReiniciarMouseClicked(evt);
             }
         });
 
@@ -321,12 +309,12 @@ public class Audiovisual extends javax.swing.JFrame {
                     .addComponent(jBusquedaR)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(btnReiniciarDVD, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnBuscarDVD, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE))
+                            .addComponent(btnReiniciar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnBuscarRevistas, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel8)
-                            .addComponent(txtCodigoDVD, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jtxtCodigoR, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(34, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -336,12 +324,12 @@ public class Audiovisual extends javax.swing.JFrame {
                 .addComponent(jBusquedaR)
                 .addGap(22, 22, 22)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnBuscarDVD)
-                    .addComponent(txtCodigoDVD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnBuscarRevistas)
+                    .addComponent(jtxtCodigoR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel8)
                 .addGap(29, 29, 29)
-                .addComponent(btnReiniciarDVD)
+                .addComponent(btnReiniciar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -419,87 +407,87 @@ public class Audiovisual extends javax.swing.JFrame {
         btnRegresar.setBackground(new Color(255,255,255));
     }//GEN-LAST:event_btnRegresarMouseExited
 
-    private void btnBuscarCDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarCDActionPerformed
+    private void btnBuscarLibroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarLibroActionPerformed
         // TODO add your handling code here:
         
         
         
-    }//GEN-LAST:event_btnBuscarCDActionPerformed
+    }//GEN-LAST:event_btnBuscarLibroActionPerformed
 
-    private void btnBuscarDVDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarDVDMouseClicked
-       /** if (txtCodigoDVD.getText().trim().isEmpty()) {
+    private void btnBuscarRevistasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarRevistasMouseClicked
+        if (jtxtCodigoR.getText().trim().isEmpty()) {
             JOptionPane.showMessageDialog(null, "El campo Codigo no puede estar en blanco.", "Error",
                     JOptionPane.ERROR_MESSAGE);
-        } else if (!MaterialDVD.localizarMaterialRevista(txtCodigoDVD.getText().trim())) {
+        } else if (!MaterialRevista.localizarMaterialRevista(jtxtCodigoR.getText().trim())) {
             JOptionPane.showMessageDialog(null, "No existe este codigo, resgistrado"
                     + "\n Imposible buscar",
                     "Error", JOptionPane.ERROR_MESSAGE);
         } else {
-            Revista = MaterialRevista.seleccionarMaterialRevista(txtCodigoDVD.getText().trim());
+            Revista = MaterialRevista.seleccionarMaterialRevista(jtxtCodigoR.getText().trim());
             cargartablebusquedaRevistas(Revista);
-            txtCodigoDVD.setText(null);
-    }//GEN-LAST:event_btnBuscarDVDMouseClicked
-    **/}
+            jtxtCodigoR.setText(null);
+    }//GEN-LAST:event_btnBuscarRevistasMouseClicked
+    }
     
-    private void btnReiniciarDVDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReiniciarDVDMouseClicked
+    private void btnReiniciarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReiniciarMouseClicked
         // TODO add your handling code here:
-         DefaultTableModel tblModelDVD = (DefaultTableModel)jTableDVD.getModel();
-         while (tblModelDVD.getRowCount()>0)
+         DefaultTableModel tblModelRevistas = (DefaultTableModel)jTableRevistas.getModel();
+         while (tblModelRevistas.getRowCount()>0)
           {
-             tblModelDVD.removeRow(0);
+             tblModelRevistas.removeRow(0);
           }
-         cargarTableDVD();
-         txtCodigoDVD.setText(null);
-    }//GEN-LAST:event_btnReiniciarDVDMouseClicked
+         cargarTableRevistas();
+         jtxtCodigoR.setText(null);
+    }//GEN-LAST:event_btnReiniciarMouseClicked
 
-    private void btnReiniciarCDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReiniciarCDActionPerformed
+    private void btnReiniciarLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReiniciarLActionPerformed
         // TODO add your handling code here:
         
-         DefaultTableModel tblModelCD = (DefaultTableModel)jTableCD.getModel();
-         while (tblModelCD.getRowCount()>0)
+         DefaultTableModel tblModelLibros = (DefaultTableModel)jTableLibros.getModel();
+         while (tblModelLibros.getRowCount()>0)
           {
-             tblModelCD.removeRow(0);
+             tblModelLibros.removeRow(0);
           }
-       cargarTableCD();
-       txtCodigoCD.setText(null);
-    }//GEN-LAST:event_btnReiniciarCDActionPerformed
+       cargarTableLibros();
+       jtxtCodigoL.setText(null);
+    }//GEN-LAST:event_btnReiniciarLActionPerformed
 
-    private void btnBuscarCDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarCDMouseClicked
+    private void btnBuscarLibroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarLibroMouseClicked
         // TODO add your handling code here:
-        if (txtCodigoCD.getText().trim().isEmpty()) {
+        if (jtxtCodigoL.getText().trim().isEmpty()) {
             JOptionPane.showMessageDialog(null, "El campo Codigo no puede estar en blanco.", "Error",
                     JOptionPane.ERROR_MESSAGE);
-        } else if (!MaterialCD.localizarMaterialCD(txtCodigoCD.getText().trim())) {
+        } else if (!MaterialLibro.localizarMaterialLibro(jtxtCodigoL.getText().trim())) {
             JOptionPane.showMessageDialog(null, "No existe este codigo, resgistrado"
                     + "\n Imposible buscar",
                     "Error", JOptionPane.ERROR_MESSAGE);
         } else {
-            
-            CD = MaterialCD.seleccionarMaterialCD(txtCodigoCD.getText().trim());
-            cargartablebusquedaCD(CD);
-             txtCodigoCD.setText(null);
-    }//GEN-LAST:event_btnBuscarCDMouseClicked
+            Libro = MaterialLibro.seleccionarMaterialLibro(jtxtCodigoL.getText().trim());
+            cargartablebusquedaLibros(Libro);
+             jtxtCodigoL.setText(null);
+    }//GEN-LAST:event_btnBuscarLibroMouseClicked
     }
     
     
-     private void cargartablebusquedaCD(MaterialCDClases CD){
-        String id = CD.getidInterno();
-        String titulo = CD.gettitulo();
-        String artista = CD.getartista();
-        String genero = CD.getgenero();
-        String numCanciones = CD.getnumCanciones();
-        String UniDispo = CD.getuniDisp();
+     private void cargartablebusquedaLibros(MaterialLibroClases Libro){
+         String id = Libro.getidInterno();
+         String titulo = Libro.gettitulo();
+         String autor = Libro.getautor();
+         String numPaginas = String.valueOf(Libro.getnumPaginas());
+         String editorial = Libro.geteditorial();
+         String unidades = String.valueOf(Libro.getuniDispo());
+         
          //Arreglo de datos
-         String tbData[] = {artista, genero, id, numCanciones, titulo, UniDispo};
-         DefaultTableModel CdMostrar = (DefaultTableModel)jTableCD.getModel();
+         String tbData[] = {id, titulo, autor,numPaginas, editorial, editorial, unidades};
+         DefaultTableModel libros = (DefaultTableModel)jTableLibros.getModel();
          
          //Agregando arreglo a la tabla
-         CdMostrar.setRowCount(0);
-         CdMostrar.addRow(tbData);  
+         libros.setRowCount(0);
+         libros.addRow(tbData);  
     }
     
     private void cargartablebusquedaRevistas(MaterialRevistaClases Revista){
-            String id = Revista.getidInterno();
+        String id = Revista.getidInterno();
          String titulo = Revista.gettitulo();
          String editorial = Revista.geteditorial();
          String disponibles = String.valueOf(Revista.getuniDispo());
@@ -507,7 +495,7 @@ public class Audiovisual extends javax.swing.JFrame {
          
          //Arreglo de datos
          String tbData[] = {id, titulo, editorial, fecha, disponibles};
-         DefaultTableModel tblModelRevistas = (DefaultTableModel)jTableDVD.getModel();
+         DefaultTableModel tblModelRevistas = (DefaultTableModel)jTableRevistas.getModel();
          
          //Agregando arreglo a la tabla
          tblModelRevistas.setRowCount(0);
@@ -534,31 +522,30 @@ public class Audiovisual extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Audiovisual.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Escrito.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Audiovisual.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Escrito.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Audiovisual.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Escrito.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Audiovisual.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Escrito.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Audiovisual().setVisible(true);
+                new Escrito().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnBuscarCD;
-    private javax.swing.JButton btnBuscarDVD;
+    private javax.swing.JButton btnBuscarLibro;
+    private javax.swing.JButton btnBuscarRevistas;
     private javax.swing.JLabel btnRegresar;
-    private javax.swing.JButton btnReiniciarCD;
-    private javax.swing.JButton btnReiniciarDVD;
+    private javax.swing.JButton btnReiniciar;
+    private javax.swing.JButton btnReiniciarL;
     private javax.swing.JLabel jBusquedaL;
     private javax.swing.JLabel jBusquedaR;
     private javax.swing.JLabel jLabel6;
@@ -569,11 +556,11 @@ public class Audiovisual extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTableCD;
-    private javax.swing.JTable jTableDVD;
+    private javax.swing.JTable jTableLibros;
+    private javax.swing.JTable jTableRevistas;
+    private javax.swing.JTextField jtxtCodigoL;
+    private javax.swing.JTextField jtxtCodigoR;
     private java.awt.Label label1;
     private javax.swing.JLabel txtAgregar;
-    private javax.swing.JTextField txtCodigoCD;
-    private javax.swing.JTextField txtCodigoDVD;
     // End of variables declaration//GEN-END:variables
 }

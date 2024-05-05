@@ -2,13 +2,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package Vistas.libro;
+package Vistas.revista;
 
-import Clases.MaterialLibroClases;
+
+import Clases.MaterialRevistaClases;
 import Logico.ConexionMySQL;
-import Logico.MaterialLibro;
+import Logico.MaterialRevista;
 import VistasPrincipales.menuBorrar;
-import VistasPrincipales.menuConsultar;
 import java.awt.Color;
 import java.awt.Font;
 import java.sql.Connection;
@@ -16,38 +16,34 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Laura Pineda
+ * 
  */
-public class Consultar extends javax.swing.JFrame {
+public class BorrarR extends javax.swing.JFrame {
 
-    private MaterialLibro MaterialLibro = new MaterialLibro ((Connection) ConexionMySQL.obtenerConexion());
-    private MaterialLibroClases Libro = null;
+    private MaterialRevista MaterialRevista = new MaterialRevista ((Connection) ConexionMySQL.obtenerConexion());
+    private MaterialRevistaClases Revista = null;
     
     private void limpiarCajas(){
         txtId.setText(null);
-        txtTitulo.setText(null);
-        txtAutor.setText(null);
-        txtPaginas.setText(null);
+        txtTitulo.setText(null);;
         txtEditorial.setText(null);
-        txtIsbn.setText(null);
+        txtPeriodicidad.setText(null);
         txtPublicacion.setText(null);
         txtUnidades.setText(null);
     }
     
-    private void cargarCajas(MaterialLibroClases Libro) {
+    private void cargarCajas(MaterialRevistaClases Revista) {
 
-       txtId.setText(Libro.getidInterno());
-        txtTitulo.setText(Libro.gettitulo());
-        txtAutor.setText(Libro.getautor());
-        txtPaginas.setText(Integer.toString(Libro.getnumPaginas()));
-        txtEditorial.setText(Libro.geteditorial());
-        txtIsbn.setText(Libro.getISBN());
-        txtPublicacion.setText(Integer.toString(Libro.getyearPubli()));
-        txtUnidades.setText(Integer.toString(Libro.getuniDispo()));
+       txtId.setText(Revista.getidInterno());
+        txtTitulo.setText(Revista.gettitulo());
+        txtEditorial.setText(Revista.geteditorial());
+        txtPeriodicidad.setText(Revista.getperiodicidad());
+        txtPublicacion.setText(Revista.getfechaPubli());
+        txtUnidades.setText(Integer.toString(Revista.getuniDispo()));
 
     }
     
-    public Consultar() {
+    public BorrarR() {
         initComponents();
     }
 
@@ -60,24 +56,22 @@ public class Consultar extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         txtId = new javax.swing.JTextField();
         txtTitulo = new javax.swing.JTextField();
-        txtAutor = new javax.swing.JTextField();
-        txtPaginas = new javax.swing.JTextField();
         txtEditorial = new javax.swing.JTextField();
-        txtIsbn = new javax.swing.JTextField();
-        txtPublicacion = new javax.swing.JTextField();
+        txtPeriodicidad = new javax.swing.JTextField();
         txtUnidades = new javax.swing.JTextField();
+        jPanel3 = new javax.swing.JPanel();
+        btnEliminar = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         btnRegresar = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         btnBuscar = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         btnNuevo = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        txtPublicacion = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -87,36 +81,68 @@ public class Consultar extends javax.swing.JFrame {
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel3.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Código de identificación:");
 
         jLabel4.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Titulo:");
 
         jLabel5.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel5.setText("Autor:");
+        jLabel5.setText("Editorial:");
 
         jLabel6.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel6.setText("Número de páginas:");
-
-        jLabel7.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel7.setText("Editorial:");
-
-        jLabel8.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel8.setText("ISBN:");
-
-        jLabel9.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel9.setText("Año de Publicación:");
+        jLabel6.setText("Periodicidad:");
 
         jLabel10.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(0, 0, 0));
         jLabel10.setText("Unidades Disponibles:");
+
+        txtId.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtIdActionPerformed(evt);
+            }
+        });
+
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jPanel3MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jPanel3MouseExited(evt);
+            }
+        });
+
+        btnEliminar.setFont(new java.awt.Font("Rockwell", 1, 14)); // NOI18N
+        btnEliminar.setForeground(new java.awt.Color(100, 100, 100));
+        btnEliminar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnEliminar.setText("Eliminar");
+        btnEliminar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnEliminarMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnEliminarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnEliminarMouseExited(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(17, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
+                .addContainerGap())
+        );
 
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
         jPanel5.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -244,61 +270,55 @@ public class Consultar extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        jLabel7.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        jLabel7.setText("Año de publicación:");
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtAutor, javax.swing.GroupLayout.PREFERRED_SIZE, 533, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(499, 499, 499))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
-                                .addComponent(jLabel7)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtEditorial, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(27, 27, 27)
-                                .addComponent(jLabel8)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtIsbn, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 532, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
-                                .addComponent(jLabel6)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtPaginas, javax.swing.GroupLayout.PREFERRED_SIZE, 435, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
-                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel9))
-                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel4Layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(txtPublicacion)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jLabel10)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(txtUnidades, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel4Layout.createSequentialGroup()
-                                        .addGap(312, 312, 312)
-                                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-            .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(252, 252, 252)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(22, 22, 22)
+                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(98, 98, 98)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(98, 98, 98)
+                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(jLabel10)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtUnidades))
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(jLabel7)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtPublicacion))
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtPeriodicidad))
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtId))
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtTitulo))
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txtEditorial, javax.swing.GroupLayout.PREFERRED_SIZE, 533, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(499, 499, 499))))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -316,26 +336,23 @@ public class Consultar extends javax.swing.JFrame {
                 .addGap(29, 29, 29)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(txtAutor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtEditorial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(31, 31, 31)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(txtPaginas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(34, 34, 34)
+                    .addComponent(txtPeriodicidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(27, 27, 27)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(txtEditorial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8)
-                    .addComponent(txtIsbn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(32, 32, 32)
+                    .addComponent(txtPublicacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(39, 39, 39)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
                     .addComponent(jLabel10)
-                    .addComponent(txtPublicacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtUnidades, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(14, 14, 14))
         );
@@ -345,9 +362,9 @@ public class Consultar extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Rockwell", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Consultar");
+        jLabel1.setText("Eliminar");
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/libro 103x103.png"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/revista 103x103.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -358,7 +375,7 @@ public class Consultar extends javax.swing.JFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(113, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -400,6 +417,12 @@ public class Consultar extends javax.swing.JFrame {
         btnBuscar.setFont(new Font("Rockwell",Font.BOLD,18));
     }//GEN-LAST:event_jPanel2MouseEntered
 
+    private void jPanel3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MouseEntered
+        jPanel3.setBackground(new Color(219,211,211));
+        btnEliminar.setForeground(new Color(0,0,0));
+        btnEliminar.setFont(new Font("Rockwell",Font.BOLD,18));
+    }//GEN-LAST:event_jPanel3MouseEntered
+
     private void jPanel5MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel5MouseEntered
         jPanel5.setBackground(new Color(219,211,211));
         btnRegresar.setForeground(new Color(0,0,0));
@@ -411,6 +434,12 @@ public class Consultar extends javax.swing.JFrame {
         btnBuscar.setForeground(new Color(100,100,100));
         btnBuscar.setFont(new Font("Rockwell",Font.BOLD,14));
     }//GEN-LAST:event_jPanel2MouseExited
+
+    private void jPanel3MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MouseExited
+        jPanel3.setBackground(new Color(255,255,255));
+        btnEliminar.setForeground(new Color(100,100,100));
+        btnEliminar.setFont(new Font("Rockwell",Font.BOLD,14));
+    }//GEN-LAST:event_jPanel3MouseExited
 
     private void jPanel5MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel5MouseExited
         jPanel5.setBackground(new Color(255,255,255));
@@ -424,6 +453,12 @@ public class Consultar extends javax.swing.JFrame {
         btnBuscar.setFont(new Font("Rockwell",Font.BOLD,18));
     }//GEN-LAST:event_btnBuscarMouseEntered
 
+    private void btnEliminarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEliminarMouseEntered
+        jPanel3.setBackground(new Color(219,211,211));
+        btnEliminar.setForeground(new Color(0,0,0));
+        btnEliminar.setFont(new Font("Rockwell",Font.BOLD,18));
+    }//GEN-LAST:event_btnEliminarMouseEntered
+
     private void btnRegresarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegresarMouseEntered
         jPanel5.setBackground(new Color(219,211,211));
         btnRegresar.setForeground(new Color(0,0,0));
@@ -436,6 +471,12 @@ public class Consultar extends javax.swing.JFrame {
         btnBuscar.setFont(new Font("Rockwell",Font.BOLD,14));
     }//GEN-LAST:event_btnBuscarMouseExited
 
+    private void btnEliminarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEliminarMouseExited
+        jPanel3.setBackground(new Color(255,255,255));
+        btnEliminar.setForeground(new Color(100,100,100));
+        btnEliminar.setFont(new Font("Rockwell",Font.BOLD,14));
+    }//GEN-LAST:event_btnEliminarMouseExited
+
     private void btnRegresarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegresarMouseExited
         jPanel5.setBackground(new Color(255,255,255));
         btnRegresar.setForeground(new Color(100,100,100));
@@ -446,21 +487,43 @@ public class Consultar extends javax.swing.JFrame {
         if (txtId.getText().trim().isEmpty()) {
             JOptionPane.showMessageDialog(null, "El campo Codigo no puede estar en blanco.", "Error",
                     JOptionPane.ERROR_MESSAGE);
-        } else if (!MaterialLibro.localizarMaterialLibro(txtId.getText().trim())) {
+        } else if (!MaterialRevista.localizarMaterialRevista(txtId.getText().trim())) {
             JOptionPane.showMessageDialog(null, "No existe este codigo, resgistrado"
-                    + "\n Imposible encontrarlo",
+                    + "\n Imposible buscar",
                     "Error", JOptionPane.ERROR_MESSAGE);
         } else {
-            Libro = MaterialLibro.seleccionarMaterialLibro(txtId.getText().trim());
-            cargarCajas(Libro);
+            Revista = MaterialRevista.seleccionarMaterialRevista(txtId.getText().trim());
+            cargarCajas(Revista);
             txtId.setEnabled(false);
             btnNuevo.requestFocus();
         }
     }//GEN-LAST:event_btnBuscarMouseClicked
 
+    private void btnEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEliminarMouseClicked
+       Object[] opciones={"Aceptar","Cancelar"};
+        
+        int eleccion = JOptionPane.showOptionDialog(null, "Eliminar esta información",
+                "Mensaje de confirmación", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE,
+                null, opciones, "Aceptar");
+        
+        if (eleccion == JOptionPane.YES_OPTION){
+            if (MaterialRevista.EliminarMaterialRevista(txtId.getText().trim())){
+                
+                JOptionPane.showMessageDialog(null, "Eliminado con éxito");
+              
+            }else {
+                JOptionPane.showMessageDialog(null, "No se ha podido eliminar esta informacion",
+                        "Error", JOptionPane.ERROR_MESSAGE);
+            }
+            this.limpiarCajas();
+            txtId.setEnabled(true);
+            txtId.requestFocus();
+        }
+    }//GEN-LAST:event_btnEliminarMouseClicked
+
     private void btnRegresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegresarMouseClicked
-        menuConsultar consultar = new menuConsultar();
-        consultar.setVisible(true);
+        menuBorrar borrar = new menuBorrar();
+        borrar.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnRegresarMouseClicked
 
@@ -494,6 +557,10 @@ public class Consultar extends javax.swing.JFrame {
         btnNuevo.setFont(new Font("Rockwell",Font.BOLD,14));
     }//GEN-LAST:event_jPanel6MouseExited
 
+    private void txtIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtIdActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -511,13 +578,13 @@ public class Consultar extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Consultar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(BorrarR.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Consultar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(BorrarR.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Consultar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(BorrarR.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Consultar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(BorrarR.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -527,13 +594,14 @@ public class Consultar extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Consultar().setVisible(true);
+                new BorrarR().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel btnBuscar;
+    private javax.swing.JLabel btnEliminar;
     private javax.swing.JLabel btnNuevo;
     private javax.swing.JLabel btnRegresar;
     private javax.swing.JLabel jLabel1;
@@ -544,18 +612,15 @@ public class Consultar extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JTextField txtAutor;
     private javax.swing.JTextField txtEditorial;
     private javax.swing.JTextField txtId;
-    private javax.swing.JTextField txtIsbn;
-    private javax.swing.JTextField txtPaginas;
+    private javax.swing.JTextField txtPeriodicidad;
     private javax.swing.JTextField txtPublicacion;
     private javax.swing.JTextField txtTitulo;
     private javax.swing.JTextField txtUnidades;

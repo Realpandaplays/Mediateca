@@ -36,9 +36,9 @@ public class MaterialCD {
         statement.setString(2, MaterialCD.gettitulo());
         statement.setString(3, MaterialCD.getartista());
         statement.setString(4, MaterialCD.getgenero());
-        statement.setInt(5,MaterialCD.getduracion());
-        statement.setInt(6,MaterialCD.getnumCanciones());
-        statement.setInt(7,MaterialCD.getuniDisp());
+        statement.setString(5,MaterialCD.getduracion());
+        statement.setString(6,MaterialCD.getnumCanciones());
+        statement.setString(7,MaterialCD.getuniDisp());
         
         rowInserted = statement.executeUpdate() > 0;
         statement.close();
@@ -49,25 +49,29 @@ public class MaterialCD {
         return rowInserted;
     }
     
+
     /*localizar por Código Interno*/
     public boolean localizarMaterialCD (String idInterno){
         boolean encontrado = false;
         
         try {
             String sql = "SELECT * FROM cd WHERE idInterno = ?";
-            try (java.sql.PreparedStatement statement = conexion.prepareStatement(sql)) {
-                statement.setString(1, idInterno);
-                try (ResultSet resultSet = statement.executeQuery()) {
-                    if (resultSet.next()) {
-                        encontrado = true;
-                    }
-                }
+            java.sql.PreparedStatement statement = conexion.prepareStatement(sql);
+            statement.setString(1, idInterno);
+            ResultSet resultSet = statement.executeQuery();
+            
+            if (resultSet.next()) {
+                encontrado = true;
             }
+
+            resultSet.close();
+            statement.close();
         } catch (SQLException ex) {
              Logger.getLogger(MaterialCD.class.getName()).log(Level.SEVERE, null, ex);
         }
         return encontrado;
     }
+     
     
     /*Seleccionar un material por su código*/
     public MaterialCDClases seleccionarMaterialCD (String idInterno){
@@ -87,26 +91,27 @@ public class MaterialCD {
                 String titulo = resultSet.getString("titulo");
                 String artista = resultSet.getString("artista");
                 String genero = resultSet.getString("genero");
-                int duracion = resultSet.getInt("duracion");
-                int numCanciones = resultSet.getInt("numCanciones");
-                int uniDisp = resultSet.getInt("uniDisp");
-                
-                materialCD = new MaterialCDClases (id, titulo, artista, genero, duracion, numCanciones, uniDisp);
+                String duracion = resultSet.getString("duracion");
+                String numCanciones = resultSet.getString("numCanciones");
+                String uniDisp = resultSet.getString("uniDisp");
+                materialCD = new MaterialCDClases (artista, duracion, genero, id, numCanciones, titulo, uniDisp);
             }
             resultSet.close();
             statement.close();
         }catch (SQLException ex) {
             Logger.getLogger(MaterialCD.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return materialCD;
-    }
-    
+        
+            return materialCD;
+        }
+
+
     /*Seleccionar todos los CDs*/
     public List<MaterialCDClases> Seleccionartodos() {
     List<MaterialCDClases> materialCDs = new ArrayList<>();
     
     try {
-        String sql = "SELECT *FROM cd";
+        String sql = "SELECT * FROM cd";
         
          Statement statement = conexion.createStatement();
          ResultSet resultSet = statement.executeQuery(sql);
@@ -116,12 +121,11 @@ public class MaterialCD {
              String titulo = resultSet.getString("titulo");
              String artista = resultSet.getString("artista");
              String genero = resultSet.getString("genero");
-             int duracion = resultSet.getInt("duracion");
-             int numCanciones = resultSet.getInt("numCanciones");
-             int uniDisp = resultSet.getInt("uniDisp");
-             
-             MaterialCDClases materialCD = new MaterialCDClases (idInterno, titulo, artista, genero, duracion, numCanciones, uniDisp);
-             materialCD.add(materialCDs);
+             String duracion = resultSet.getString("duracion");
+             String numCanciones = resultSet.getString("numCanciones");
+             String uniDisp = resultSet.getString("uniDisp");
+             MaterialCDClases materialCD1 = new MaterialCDClases (idInterno, titulo, artista, genero, duracion, numCanciones, uniDisp);
+             materialCD1.add(materialCDs);
          }
             resultSet.close();
             statement.close();
@@ -137,7 +141,6 @@ public class MaterialCD {
         
         try {
             String sql = "UPDATE cd SET titulo = ?, artista = ?, genero = ?, duracion = ?, numCanciones = ?, uniDisp = ? WHERE idInterno = ?";
-            
             try (PreparedStatement statement = conexion.prepareStatement(sql)) {
                 statement.setString(1, MaterialCD.gettitulo());
                 statement.setString(2, MaterialCD.getartista());
@@ -145,18 +148,16 @@ public class MaterialCD {
                 statement.setInt(4, MaterialCD.getnumCanciones());
                 statement.setInt(5, MaterialCD.getduracion());
                 statement.setInt(6, MaterialCD.getuniDisp());
-                
                 statement.setString(7, MaterialCD.getidInterno());
-                
                 rowUpdated = statement.executeUpdate()>0;
             }
         }catch (SQLException ex) {
-            Logger.getLogger(MaterialLibro.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MaterialCD.class.getName()).log(Level.SEVERE, null, ex);
         }
         return rowUpdated;
     }
     
-    /*Eliminar material Libro*/
+    /*Eliminar material CD*/
     public boolean EliminarMaterialCD (String idInterno){
         boolean rowDeleted = false;
         
@@ -170,7 +171,7 @@ public class MaterialCD {
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(MaterialLibro.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MaterialCD.class.getName()).log(Level.SEVERE, null, ex);
         }
         return rowDeleted;
     }

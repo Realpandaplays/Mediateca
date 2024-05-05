@@ -39,9 +39,9 @@ public class ConsultarCD extends javax.swing.JFrame {
         txtTitulo.setText(CD.gettitulo());
         txtArtista.setText(CD.getartista());
         txtGenero.setText(CD.getgenero());
-        txtDuracion.setText(Integer.toString(CD.getduracion()));
-        txtNumero.setText(Integer.toString(CD.getnumCanciones()));
-        txtUnidades.setText(Integer.toString(CD.getuniDisp()));
+        txtDuracion.setText(CD.getduracion());
+        txtNumero.setText(CD.getnumCanciones());
+        txtUnidades.setText(CD.getuniDisp());
 
     }
     
