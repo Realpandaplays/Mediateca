@@ -553,7 +553,9 @@ public class menuBorrar extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCdMouseClicked
 
     private void btnDvdMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDvdMouseClicked
-        // TODO add your handling code here:
+        Vistas.dvd.Borrar dvdBorrar = new Vistas.dvd.Borrar();
+        dvdBorrar.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnDvdMouseClicked
 
     /**

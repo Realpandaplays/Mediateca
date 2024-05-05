@@ -20,14 +20,14 @@ import javax.swing.JOptionPane;
 public class AgregarDvd extends javax.swing.JFrame {
 
     private MaterialDVD MaterialDVD = new MaterialDVD ((Connection) ConexionMySQL.obtenerConexion());
-    
+
     private void limpiarCajas(){
         txtId.setText(null);
         txtTitulo.setText(null);
         txtDirector.setText(null);
         txtGenero.setText(null);
         txtDuracion.setText(null);
-        
+
     }
     public AgregarDvd() {
         initComponents();
@@ -63,23 +63,18 @@ public class AgregarDvd extends javax.swing.JFrame {
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel3.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Código de identificación:");
 
         jLabel4.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Titulo:");
 
         jLabel5.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("Director:");
 
         jLabel7.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
         jLabel7.setText("Género:");
 
         jLabel9.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(0, 0, 0));
         jLabel9.setText("Duración:");
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
@@ -430,10 +425,10 @@ public class AgregarDvd extends javax.swing.JFrame {
             String director = txtDirector.getText();
             String genero = txtGenero.getText();
             int duracion = Integer.parseInt(txtDuracion.getText());
-            
+
             MaterialDVDClases MaterialDVDClases = new MaterialDVDClases(idInterno, titulo, director, duracion, genero);
-            
-            if (MaterialDVD.MaterialDVD(MaterialDVDClases)){
+
+            if (MaterialDVD.insertarMaterialDVD(MaterialDVDClases)){
                 JOptionPane.showMessageDialog(this, "Material guardado correctamente",
                         "Guardar material", JOptionPane.INFORMATION_MESSAGE);
             } else {
@@ -441,13 +436,13 @@ public class AgregarDvd extends javax.swing.JFrame {
                         "Guardar material", JOptionPane.INFORMATION_MESSAGE);
             }
         }
-            limpiarCajas();
-            txtId.requestFocus();
+        limpiarCajas();
+        txtId.requestFocus();
     }//GEN-LAST:event_btnGuardarMouseClicked
 
     private void btnNuevoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNuevoMouseClicked
-       limpiarCajas();
-       txtId.requestFocus();
+        limpiarCajas();
+        txtId.requestFocus();
     }//GEN-LAST:event_btnNuevoMouseClicked
 
     private void btnRegresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegresarMouseClicked
@@ -463,7 +458,7 @@ public class AgregarDvd extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -481,6 +476,14 @@ public class AgregarDvd extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(AgregarDvd.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
