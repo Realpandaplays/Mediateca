@@ -136,7 +136,7 @@ public class MaterialCD {
         boolean rowUpdated = false;
         
         try {
-            String sql = "UPDATE cd SET titulo = ?, artista = ?, genero = ?, duracion = ?, numCanciones = ?, uniDisp = ?, WHERE idInterno = ?";
+            String sql = "UPDATE cd SET titulo = ?, artista = ?, genero = ?, duracion = ?, numCanciones = ?, uniDisp = ? WHERE idInterno = ?";
             
             try (PreparedStatement statement = conexion.prepareStatement(sql)) {
                 statement.setString(1, MaterialCD.gettitulo());
