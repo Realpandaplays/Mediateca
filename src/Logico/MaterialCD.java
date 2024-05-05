@@ -27,7 +27,7 @@ public class MaterialCD {
         boolean rowInserted = false;
         
         try {
-            String sql = "INSERT INTO cd (idInterno, titulo, artista, genero"
+            String sql = "INSERT INTO cd (idInterno, titulo, artista, genero,"
                     + "duracion, numCanciones, uniDisp) "
                     + "VALUES (?,?,?,?,?,?,?)";
         java.sql.PreparedStatement statement = conexion.prepareStatement(sql);
@@ -49,8 +49,8 @@ public class MaterialCD {
         return rowInserted;
     }
     
-
-     public boolean localizarMaterialCD (String idInterno){
+    /*localizar por Código Interno*/
+    public boolean localizarMaterialCD (String idInterno){
         boolean encontrado = false;
         
         try {
@@ -91,7 +91,11 @@ public class MaterialCD {
                 int numCanciones = resultSet.getInt("numCanciones");
                 int uniDisp = resultSet.getInt("uniDisp");
                 
-                materialCD = new MaterialCDClases (id, titulo, artista, duracion, genero, numCanciones, uniDisp);
+                materialCD = new MaterialCDClases (id, titulo, artista, genero, duracion, numCanciones, uniDisp);
+            }
+            resultSet.close();
+            statement.close();
+        }catch (SQLException ex) {
             Logger.getLogger(MaterialCD.class.getName()).log(Level.SEVERE, null, ex);
         }
         return materialCD;
@@ -116,7 +120,7 @@ public class MaterialCD {
              int numCanciones = resultSet.getInt("numCanciones");
              int uniDisp = resultSet.getInt("uniDisp");
              
-             MaterialCDClases materialCD = new MaterialCDClases (idInterno, titulo, artista, duracion, genero, numCanciones, uniDisp);
+             MaterialCDClases materialCD = new MaterialCDClases (idInterno, titulo, artista, genero, duracion, numCanciones, uniDisp);
              materialCD.add(materialCDs);
          }
             resultSet.close();
@@ -132,20 +136,17 @@ public class MaterialCD {
         boolean rowUpdated = false;
         
         try {
-            String sql = "UPDATE cd SET titulo = ?, "
-                    + " autor = ?, numPaginas = ?, editorial = ?, ISBN = ?,"
-                    + " yearPubli = ?, uniDispo = ?"
-                    + " WHERE idInterno = ?";
+            String sql = "UPDATE cd SET titulo = ?, artista = ?, genero = ?, duracion = ?, numCanciones = ?, uniDisp = ?, WHERE idInterno = ?";
             
             try (PreparedStatement statement = conexion.prepareStatement(sql)) {
                 statement.setString(1, MaterialCD.gettitulo());
                 statement.setString(2, MaterialCD.getartista());
                 statement.setString(3, MaterialCD.getgenero());
-                statement.setInt(5, MaterialCD.getnumCanciones());
-                statement.setInt(6, MaterialCD.getduracion());
-                statement.setInt(7, MaterialCD.getuniDisp());
+                statement.setInt(4, MaterialCD.getnumCanciones());
+                statement.setInt(5, MaterialCD.getduracion());
+                statement.setInt(6, MaterialCD.getuniDisp());
                 
-                statement.setString(8, MaterialCD.getidInterno());
+                statement.setString(7, MaterialCD.getidInterno());
                 
                 rowUpdated = statement.executeUpdate()>0;
             }
@@ -172,8 +173,5 @@ public class MaterialCD {
             Logger.getLogger(MaterialLibro.class.getName()).log(Level.SEVERE, null, ex);
         }
         return rowDeleted;
-            Logger.getLogger(MaterialLibro.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return materialCD;
     }
 }

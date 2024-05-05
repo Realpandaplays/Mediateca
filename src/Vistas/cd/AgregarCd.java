@@ -443,16 +443,16 @@ public class AgregarCd extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "El campo Titulo no puede quedar en blanco",
                     "Error", JOptionPane.ERROR_MESSAGE);
         } else if (txtArtista.getText().trim().isEmpty()){
-            JOptionPane.showMessageDialog(null, "El campo Autor no puede quedar en blanco",
+            JOptionPane.showMessageDialog(null, "El campo Artista no puede quedar en blanco",
                     "Error", JOptionPane.ERROR_MESSAGE);
         } else if (!txtNumero.getText().matches("[0-9]+")){
-            JOptionPane.showMessageDialog(null, "El campo Numero de Paginas solo puede contener numeros",
+            JOptionPane.showMessageDialog(null, "El campo Numero de Canciones solo puede contener numeros",
                     "Error", JOptionPane.ERROR_MESSAGE);
         } else if (txtGenero.getText().trim().isEmpty()){
-            JOptionPane.showMessageDialog(null, "El campo Editorial no puede quedar en blanco",
+            JOptionPane.showMessageDialog(null, "El campo Genero no puede quedar en blanco",
                     "Error", JOptionPane.ERROR_MESSAGE);
         } else if (!txtDuracion.getText().matches("[0-9]+")){
-            JOptionPane.showMessageDialog(null, "El campo Año de Publicación solo puede contener numeros",
+            JOptionPane.showMessageDialog(null, "El campo Duracion de Publicación solo puede contener numeros",
                     "Error", JOptionPane.ERROR_MESSAGE);
         } else if (!txtUnidades.getText().matches("[0-9]+")){
             JOptionPane.showMessageDialog(null, "El campo Unidades disponibles solo puede contener numeros",
