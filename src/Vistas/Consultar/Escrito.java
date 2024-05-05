@@ -55,7 +55,7 @@ public class Escrito extends javax.swing.JFrame {
          String id = rs.getString("idInterno");
          String titulo = rs.getString("titulo");
          String autor = rs.getString("autor");
-          String numPaginas = String.valueOf(rs.getInt("numPaginas"));
+         String numPaginas = String.valueOf(rs.getInt("numPaginas"));
          String disponibles = String.valueOf(rs.getInt("uniDispo"));
          String editorial = rs.getString("editorial");
          
@@ -84,7 +84,7 @@ public class Escrito extends javax.swing.JFrame {
          
          Statement st = con.createStatement();
          
-         String sql = "Select * from Revistas";
+         String sql = "Select idInterno, titulo, editorial, uniDispo from Revistas";
          ResultSet rs = st.executeQuery(sql);
          
          while(rs.next()){
@@ -93,10 +93,9 @@ public class Escrito extends javax.swing.JFrame {
          String titulo = rs.getString("titulo");
          String editorial = rs.getString("editorial");
          String disponibles = String.valueOf(rs.getInt("uniDispo"));
-         String fecha = rs.getString("fechaPubli");
          
          //Arreglo de datos
-         String tbData[] = {id, titulo, editorial, fecha, disponibles};
+         String tbData[] = {id, titulo, editorial, disponibles};
          DefaultTableModel tblModelRevistas = (DefaultTableModel)jTableRevistas.getModel();
          
          //Agregando arreglo a la tabla
@@ -269,7 +268,7 @@ public class Escrito extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Codigo", "Titulo", "Editorial", "Fecha de publicacion", "Disponibles"
+                "Codigo", "Titulo", "Editorial", "Disponibles"
             }
         ));
         jScrollPane2.setViewportView(jTableRevistas);
@@ -491,10 +490,8 @@ public class Escrito extends javax.swing.JFrame {
          String titulo = Revista.gettitulo();
          String editorial = Revista.geteditorial();
          String disponibles = String.valueOf(Revista.getuniDispo());
-         String fecha = Revista.getfechaPubli();
-         
          //Arreglo de datos
-         String tbData[] = {id, titulo, editorial, fecha, disponibles};
+         String tbData[] = {id, titulo, editorial, disponibles};
          DefaultTableModel tblModelRevistas = (DefaultTableModel)jTableRevistas.getModel();
          
          //Agregando arreglo a la tabla
